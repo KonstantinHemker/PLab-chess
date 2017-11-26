@@ -1,0 +1,10 @@
+#include "ChessBoard.h"
+
+
+class King : public ChessBoard  {
+ private:
+  int rank;
+  int file; //converted ASCII characters
+ public:
+
+}
