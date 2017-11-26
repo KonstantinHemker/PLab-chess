@@ -1,7 +1,6 @@
 //Implementation file for queen
 #include "Queen.h"
 
-Queen::Queen(char input_rank, int input_file) {
-  rank  = input_rank;
-  file = input_file;
+Queen::Queen(char a, int b) : Figure (char a, int b) {
+//tbc
 }

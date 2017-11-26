@@ -2,15 +2,13 @@
 #ifndef KNIGHT_H
 #define KNIGHT_H
 
-#include "ChessBoard.h"
+//#include "ChessBoard.h"
+#include "Figure.h"
 
-
-class Knight  {
+class Knight : public Figure  {
  private:
-  char rank;
-  int file; //converted ASCII characters
  public:
-  Knight(char input_rank, int input_file_);
+  Knight(char a, int b);
 };
 
 #endif

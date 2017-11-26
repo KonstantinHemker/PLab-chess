@@ -2,15 +2,13 @@
 #ifndef PAWN_H
 #define PAWN_H
 
-#include "ChessBoard.h"
+//#include "ChessBoard.h"
+#include "Figure.h"
 
-
-class Pawn  {
+class Pawn : public Figure  {
  private:
-  int rank;
-  int file; //converted ASCII characters
  public:
-  Pawn(char input_rank, int input_file_);
+  Pawn(char a, int b);
 };
 
 #endif

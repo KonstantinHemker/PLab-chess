@@ -2,14 +2,14 @@
 #ifndef QUEEN_H
 #define QUEEN_H
 
-#include "ChessBoard.h"
+//#include "ChessBoard.h"
+#include "Figure.h"
 
-
-class Queen {
+class Queen : public Figure {
  private:
   int rank;
   int file; //converted ASCII characters
  public:
-  Queen(char input_rank, int input_file_);
+  Queen(char a, int b);
 };
 #endif

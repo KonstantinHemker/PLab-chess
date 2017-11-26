@@ -1,15 +1,14 @@
 #ifndef KING_H
 #define KING_H
 
-#include "ChessBoard.h"
+#include "Figure.h"
 
 
-class King  {
+class King : public Figure  {
  private:
-  char rank;
-  int file; //converted ASCII characters
+
  public:
-  King(char input_rank, int input_file_);
+  King (char a, int b);
 };
 
 #endif

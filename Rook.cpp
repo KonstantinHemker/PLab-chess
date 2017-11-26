@@ -2,7 +2,6 @@
 
 #include "Rook.h"
 
-Rook::Rook(char input_rank, int input_file) {
-  rank  = input_rank;
-  file = input_file;
+Rook::Rook(char a, int b) : Figure (char a, int b) {
+  //tbc
 }

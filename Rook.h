@@ -1,15 +1,13 @@
 #ifndef ROOK_H
 #define ROOK_H
 
-#include "ChessBoard.h"
+//#include "ChessBoard.h"
+#include "Figure.h"
 
-
-class Rook  {
+class Rook : public Figure  {
  private:
-  int rank;
-  int file; //converted ASCII characters
  public:
-  Rook(char input_rank, int input_file_);
+  Rook(char a, int b);
 };
 
 #endif

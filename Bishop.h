@@ -1,14 +1,15 @@
 //Header file for bishop
 #ifndef BISHOP_H
 #define BISHOP_H
-#include "ChessBoard.h"
 
-class Bishop{
+//#include "ChessBoard.h"
+#include "Figure.h"
+
+class Bishop : public Figure {
  private:
-  char rank;
-  int file; //converted ASCII characters
+
  public:
-  Bishop(char input_rank, int input_file_);
+   Bishop (char a, int b);
 };
 
 #endif

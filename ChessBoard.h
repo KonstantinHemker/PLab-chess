@@ -2,6 +2,7 @@
 #ifndef CHESSBOARD_H
 #define CHESSBOARD_H
 
+
 #include<iostream>
 #include<cstring>
 #include<cstdlib>
@@ -15,6 +16,7 @@ class Pawn;
 class Bishop;
 class Queen;
 class Knight;
+class Figure;
 
 class ChessBoard {
 protected:
@@ -28,12 +30,10 @@ protected:
 
 public:
   ChessBoard ();
-  //void submitMove(string currentPosition, string nextPosition);
+  void submitMove(string currentPosition, string nextPosition);
   void resetBoard();
   //virtual void valid_move ();
   void set_figures ();
-
-
   //friend ostream& operator << (ostrea)
 };
 
