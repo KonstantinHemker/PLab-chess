@@ -7,8 +7,7 @@
 
 class Queen : public Figure {
  private:
-  int rank;
-  int file; //converted ASCII characters
+//converted ASCII characters
  public:
   Queen(char a, int b);
 };

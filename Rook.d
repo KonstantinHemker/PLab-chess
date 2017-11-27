@@ -1,1 +1,1 @@
-Rook.o: Rook.cpp Rook.h ChessBoard.h
+Rook.o: Rook.cpp Rook.h Figure.h

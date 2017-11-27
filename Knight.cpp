@@ -1,6 +1,6 @@
 //Implementation file for knight
 #include "Knight.h"
 
-Knight::Knight(char a, int b) : Figure (char a, int b)  {
+Knight::Knight(char a, int b) : Figure (a, b)  {
 //tbc
 }

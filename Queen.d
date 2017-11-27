@@ -1,1 +1,1 @@
-Queen.o: Queen.cpp Queen.h ChessBoard.h
+Queen.o: Queen.cpp Queen.h Figure.h

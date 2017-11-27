@@ -1,1 +1,1 @@
-Pawn.o: Pawn.cpp Pawn.h ChessBoard.h
+Pawn.o: Pawn.cpp Pawn.h Figure.h

@@ -1,7 +1,7 @@
-#ifndef KNIHGT_H
-#define KNIGHT_H
+#ifndef FIGURE_H
+#define FIGURE_H
 
-#include "ChessBoard.h"
+//#include "ChessBoard.h"
 //Abstract parent class for the chess figures
 
 class Figure  {
@@ -11,6 +11,7 @@ protected:
   char colour;
 public:
   Figure(char input_rank, int input_file);
+  //virtual void valid_move();
 };
 
 

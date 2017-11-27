@@ -1,1 +1,1 @@
-Knight.o: Knight.cpp Knight.h ChessBoard.h
+Knight.o: Knight.cpp Knight.h Figure.h

@@ -2,7 +2,7 @@
 #ifndef CHESSBOARD_H
 #define CHESSBOARD_H
 
-
+#include "Figure.h"
 #include<iostream>
 #include<cstring>
 #include<cstdlib>
@@ -20,7 +20,11 @@ class Figure;
 
 class ChessBoard {
 protected:
-/*
+  King* wking1; 
+
+  
+  /*
+Create pointers to classes
   King wKing, bKing;
   Queen wQueen, bQueen;
   Rook wRook1, wRook2, bRook1, bRook4;
@@ -34,7 +38,7 @@ public:
   void resetBoard();
   //virtual void valid_move ();
   void set_figures ();
-  //friend ostream& operator << (ostrea)
+  //friend ostream& operator << (ostream)
 };
 
 

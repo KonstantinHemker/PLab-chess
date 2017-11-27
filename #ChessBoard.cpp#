@@ -1,7 +1,6 @@
 /*Implementation file for the chessboard*/
 
 #include "ChessBoard.h"
-#include "Figure.h"
 #include "Bishop.h"
 #include "King.h"
 #include "Knight.h"

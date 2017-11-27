@@ -1,1 +1,1 @@
-King.o: King.cpp King.h ChessBoard.h
+King.o: King.cpp King.h Figure.h
