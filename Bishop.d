@@ -1,1 +1,1 @@
-Bishop.o: Bishop.cpp Bishop.h Figure.h
+Bishop.o: Bishop.cpp Bishop.h Figure.h ChessBoard.h

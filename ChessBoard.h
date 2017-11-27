@@ -2,10 +2,10 @@
 #ifndef CHESSBOARD_H
 #define CHESSBOARD_H
 
-#include "Figure.h"
 #include<iostream>
 #include<cstring>
 #include<cstdlib>
+#include<string>
 
 using namespace std;
 
@@ -20,7 +20,7 @@ class Figure;
 
 class ChessBoard {
 protected:
-  King* wking1; 
+  King* wking1;
 
   
   /*

@@ -11,3 +11,10 @@ Figure::Figure(char input_rank, int input_file) {
   else
     colour = 'B';
 }
+
+
+string Figure::get_position()  {
+  string temp;
+  temp = rank + file;
+  return temp;
+}

@@ -1,1 +1,1 @@
-ChessMain.o: ChessMain.cpp ChessBoard.h Figure.h
+ChessMain.o: ChessMain.cpp ChessBoard.h
