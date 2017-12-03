@@ -9,6 +9,7 @@
 
 using namespace std;
 
+
 //Forward declaration of classes:
 class King;
 class Rook;
@@ -17,20 +18,19 @@ class Bishop;
 class Queen;
 class Knight;
 class Figure;
+class Field;
+
 
 class ChessBoard {
 protected:
-  King* wking1;
+  King *wKing, *bKing;
+  Queen *wQueen, *bQueen;
+  Rook *wRook[2], *bRook[2];
+  Bishop *wBishop[2], *bBishop[2];
+  Knight *wKnight[2], *bKnight[2];
+  Pawn *wPawn[8], *bPawn[8];
 
-  
-  /*
-Create pointers to classes
-  King wKing, bKing;
-  Queen wQueen, bQueen;
-  Rook wRook1, wRook2, bRook1, bRook4;
-  Bishop wBishop1, wBishop2, bBishop1, bBishop2;
-  Knight wKnight1, wKnigth2, bKnight1, bKnight2;
-*/
+  Field *square[8][8]; //two-dimensional array of pointers to the chess board
 
 public:
   ChessBoard ();

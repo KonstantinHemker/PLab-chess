@@ -1,6 +1,7 @@
 //Implementation file for queen
 #include "Queen.h"
 
-Queen::Queen(char a, int b) : Figure (a, b) {
+//Queen::Queen(char a, int b) : Figure (a, b)  {
+
+//}
 //tbc
-}

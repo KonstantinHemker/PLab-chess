@@ -10,7 +10,8 @@ protected:
   int file;
   char colour;
 public:
-  Figure(char input_rank, int input_file);
+  //Figure (char input_rank, int input_file);
+  void set_position(char input_rank, int input_file);
   string get_position();
   //virtual void valid_move();
 };

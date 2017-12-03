@@ -8,7 +8,7 @@
 class Pawn : public Figure  {
  private:
  public:
-  Pawn(char a, int b);
+  //Pawn (char a, int b);
 };
 
 #endif

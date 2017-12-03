@@ -8,7 +8,7 @@
 class Knight : public Figure  {
  private:
  public:
-  Knight(char a, int b);
+  //Knight(char a, int b);
 };
 
 #endif

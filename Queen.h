@@ -9,6 +9,6 @@ class Queen : public Figure {
  private:
 //converted ASCII characters
  public:
-  Queen(char a, int b);
+  //Queen(char a, int b);
 };
 #endif
