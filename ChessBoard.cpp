@@ -54,6 +54,7 @@ ChessBoard::ChessBoard () {
     square[n][c] = &field[n][c];
   }
 
+
 }
 
 void ChessBoard::set_figures()  {

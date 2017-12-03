@@ -12,7 +12,7 @@ protected:
 public:
   //Figure (char input_rank, int input_file);
   void set_position(char input_rank, int input_file, FigurePtr figure,
-  FieldPtr field[][8], std::map<FigurePtr, FieldPtr> &temp_map);
+  FieldPtr field[][8], std::map<FieldPtr, FigurePtr> &mapping);
   string get_position();
   //virtual void valid_move();
 };

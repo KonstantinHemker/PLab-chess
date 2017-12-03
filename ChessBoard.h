@@ -33,7 +33,7 @@ protected:
   Figure *wKnight[2], *bKnight[2];
   Figure *wPawn[8], *bPawn[8];
   FieldPtr square[8][8]; //two-dimensional array of pointers to the chess board
-  map<FigurePtr,FieldPtr> mapping;
+  map<FieldPtr, FigurePtr> mapping;
 
 
 public:
