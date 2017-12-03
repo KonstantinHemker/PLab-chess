@@ -1,3 +1,0 @@
-#include "King.h" 
-
-King::King(int input_rank, int input_file) {

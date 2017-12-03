@@ -72,6 +72,7 @@ void ChessBoard::set_figures()  {
     }
 
   //Create black team
+  //Note that the positions are indexed to 1
   bKing->set_position('E', 8, bKing, square, mapping);
   bQueen->set_position('D',8, bQueen, square, mapping);
   bRook[0]->set_position('A', 8, bRook[0], square, mapping);

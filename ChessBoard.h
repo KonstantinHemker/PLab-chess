@@ -35,23 +35,13 @@ protected:
   FieldPtr square[8][8]; //two-dimensional array of pointers to the chess board
   map<FigurePtr,FieldPtr> mapping;
 
-  /*
-  King *wKing, *bKing;
-  Queen *wQueen, *bQueen;
-  Rook *wRook[2], *bRook[2];
-  Bishop *wBishop[2], *bBishop[2];
-  Knight *wKnight[2], *bKnight[2];
-  Pawn *wPawn[8], *bPawn[8];
-  FieldPtr square[8][8]; //two-dimensional array of pointers to the chess board
-  map<FigurePtr,FieldPtr> mapping;
-  */
+
 public:
   ChessBoard ();
   void submitMove(string currentPosition, string nextPosition);
   void resetBoard();
-  //virtual void valid_move ();
+  //virtual bool valid_move ();
   void set_figures ();
-  //void set_map();
   //friend ostream& operator << (ostream)
 };
 
