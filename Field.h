@@ -6,7 +6,6 @@
 class Field {
 private:
   bool empty;
-
 public:
   //Function that checks whether the square is empty
   bool is_empty();

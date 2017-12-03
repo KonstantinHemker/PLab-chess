@@ -85,11 +85,12 @@ void ChessBoard::set_figures()  {
     bPawn[i]->set_position('i', 7);
 }
 
+//Initialise map
+
+
 }
 
 void ChessBoard::submitMove(string currentPosition, string nextPosition) {
-
-
   return;
 }
 

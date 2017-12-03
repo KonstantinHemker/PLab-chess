@@ -6,11 +6,10 @@
 #include<cstring>
 #include<cstdlib>
 #include<string>
+#include<map>
 
 using namespace std;
 
-
-//Forward declaration of classes:
 class King;
 class Rook;
 class Pawn;
@@ -20,6 +19,8 @@ class Knight;
 class Figure;
 class Field;
 
+typedef Figure* FigurePtr;
+typedef Field* FieldPtr;
 
 class ChessBoard {
 protected:
@@ -29,8 +30,9 @@ protected:
   Bishop *wBishop[2], *bBishop[2];
   Knight *wKnight[2], *bKnight[2];
   Pawn *wPawn[8], *bPawn[8];
-
-  Field *square[8][8]; //two-dimensional array of pointers to the chess board
+  FieldPtr square[8][8]; //two-dimensional array of pointers to the chess board
+  map<FigurePtr,FieldPtr> mapping;
+  //map<char, int> mapping;
 
 public:
   ChessBoard ();
