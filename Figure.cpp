@@ -3,7 +3,7 @@
 #include "Figure.h"
 
 
-void Figure::set_position(char input_rank, int input_file, FigurePtr figure,
+void Figure::setPosition(char input_rank, int input_file, FigurePtr figure,
 FieldPtr field[][8], std::map<FieldPtr, FigurePtr> &mapping )  {
   rank = input_rank;
   file = input_file;
@@ -28,7 +28,7 @@ FieldPtr field[][8], std::map<FieldPtr, FigurePtr> &mapping )  {
     colour = 'B';
 }
 
-string Figure::get_position()  {
+string Figure::getPosition()  {
   string temp;
   temp = rank + file;
   return temp;

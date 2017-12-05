@@ -21,6 +21,31 @@ ChessBoard::ChessBoard () {
   Pawn pawn[16];
   //Create the chessboard in a 2D array of pointers to objects
 //initialise pointers
+/*
+FigurePtr wKing = new King;
+FigurePtr bKing = new King;
+FigurePtr wQueen = new Queen;
+FigurePtr bQueen = new Queen;
+FigurePtr wRook[0] = new Rook;
+FigurePtr wRook[1] = new Rook;
+FigurePtr bRook[0] = new Rook;
+FigurePtr bRook[1] = new Rook;
+FigurePtr wBishop[0] = new Bishop;
+FigurePtr wBishop[1] = new Bishop;
+FigurePtr bBishop[0] = new Bishop;
+FigurePtr bBishop[1] = new Bishop;
+FigurePtr wKnight[0] = new Knight;
+FigurePtr wKnight[1] = new Knight;
+FigurePtr bKnight[0] = new Knight;
+FigurePtr bKnight[1] = new Knight;
+
+for (int i = 0; i<8; i++)
+  FigurePtr wPawn[i] = new Pawn;
+
+for (int c = 0; c<8; c++)
+  FigurePtr bPawn[i] = new Pawn;
+*/
+
   wKing = &king[0];
   bKing = &king[1];
   wQueen = &queen[0];
@@ -45,7 +70,6 @@ ChessBoard::ChessBoard () {
   for (int i = 8; i < 16; i++)
     bPawn[i-8] = &pawn[i];
   //Create the figures and initialise them on the board
-  set_figures();
 
   Field field[8][8];
 
@@ -54,66 +78,65 @@ ChessBoard::ChessBoard () {
     square[n][c] = &field[n][c];
   }
 
+  set_figures();
 
 }
 
 void ChessBoard::set_figures()  {
   //Create white team
-   wKing->set_position('E', 1, wKing, square, mapping);
-   wQueen->set_position('D',1, wQueen, square, mapping);
-   wRook[0]->set_position('A', 1, wRook[0], square, mapping);
-   wRook[1]->set_position('H', 1, wRook[1], square, mapping);
-   wBishop[0]->set_position('C', 1, wBishop[0], square, mapping);
-   wBishop[1]->set_position('F', 1, wBishop[1], square, mapping);
-   wKnight[0]->set_position('B', 1, wKnight[0], square, mapping);
-   wKnight[1]->set_position('G', 1, wKnight[1], square, mapping);
+   wKing->setPosition('E', 1, wKing, square, mapping);
+   wQueen->setPosition('D',1, wQueen, square, mapping);
+   wRook[0]->setPosition('A', 1, wRook[0], square, mapping);
+   wRook[1]->setPosition('H', 1, wRook[1], square, mapping);
+   wBishop[0]->setPosition('C', 1, wBishop[0], square, mapping);
+   wBishop[1]->setPosition('F', 1, wBishop[1], square, mapping);
+   wKnight[0]->setPosition('B', 1, wKnight[0], square, mapping);
+   wKnight[1]->setPosition('G', 1, wKnight[1], square, mapping);
 
   for (int i = 65; i < 73; i++) {
-    wPawn[i-65]->set_position(i, 2, wPawn[i-65], square, mapping); //where 65 and 73 refer to the ASCII values
+    wPawn[i-65]->setPosition(i, 2, wPawn[i-65], square, mapping); //where 65 and 73 refer to the ASCII values
     }
+
 
   //Create black team
   //Note that the positions are indexed to 1
-  bKing->set_position('E', 8, bKing, square, mapping);
-  bQueen->set_position('D',8, bQueen, square, mapping);
-  bRook[0]->set_position('A', 8, bRook[0], square, mapping);
-  bRook[1]->set_position('H', 8, bRook[1], square, mapping);
-  bBishop[0]->set_position('C',8, bBishop[0], square, mapping);
-  bBishop[1]->set_position('F', 8, bBishop[1], square, mapping);
-  bKnight[0]->set_position('B',8, bKnight[0], square, mapping);
-  bKnight[1]->set_position('G',8, bKnight[1], square, mapping);
+  bKing->setPosition('E', 8, bKing, square, mapping);
+  bQueen->setPosition('D',8, bQueen, square, mapping);
+  bRook[0]->setPosition('A', 8, bRook[0], square, mapping);
+  bRook[1]->setPosition('H', 8, bRook[1], square, mapping);
+  bBishop[0]->setPosition('C',8, bBishop[0], square, mapping);
+  bBishop[1]->setPosition('F', 8, bBishop[1], square, mapping);
+  bKnight[0]->setPosition('B',8, bKnight[0], square, mapping);
+  bKnight[1]->setPosition('G',8, bKnight[1], square, mapping);
 
   for (int i = 65; i < 73; i++) {
-    bPawn[i-65]->set_position(i, 7, bPawn[i-65], square, mapping);
+    bPawn[i-65]->setPosition(i, 7, bPawn[i-65], square, mapping);
 }
 }
-/*
-void ChessBoard::set_map()  {
-  mapping[wKing] = square[E][1];
-  mapping[wQueen] = square[D][1];
-  mapping[wRook[0]] = square[A][1];
-  mapping[wRook[1]] = square[A][1];
-  mapping[wBishop[0]] = square[C][1];
-  mapping[wBishop[1]] = square[F][1];
-  mapping[wKnight[0]] = square[B][1];
-  mapping[wKnight[1]] = square[G][1];
-  for (int i = 65; i<73; i++)
-    mapping[bPawn[i-65]] = square[i][2];
-
-  mapping[bKing] = square[E][1];
-  mapping[bQueen] = square[D][1];
-  mapping[bRook[0]] = square[A][1];
-  mapping[bRook[1]] = square[A][1];
-  mapping[bBishop[0]] = square[C][1];
-  mapping[bBishop[1]] = square[F][1];
-  mapping[bKnight[0]] = square[B][1];
-  mapping[bKnight[1]] = square[G][1];
-  for (int i = 65; i<73; i++)
-    mapping[bPawn[i-65]] = square[i][2];
 
 
+FigurePtr ChessBoard::getPosition(char pos[]) {
+  cout << pos[0] << endl;
+  cout << pos[1] << endl;
+  cout << mapping[square[0][1]] << endl;
+  //return mapping[square[getRank(pos[0])][getFile(pos[1])]];
 }
-*/
+
+int getRank (char character) {
+  return character-65;
+}
+
+int getFile (char number) {
+  return number-1;
+}
+
+
+//void ChessBoard::printPosition(string pos) {
+
+//}
+
+
+
 void ChessBoard::submitMove(string currentPosition, string nextPosition) {
   return;
 }

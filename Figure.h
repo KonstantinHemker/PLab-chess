@@ -11,9 +11,9 @@ protected:
   char colour;
 public:
   //Figure (char input_rank, int input_file);
-  void set_position(char input_rank, int input_file, FigurePtr figure,
+  void setPosition(char input_rank, int input_file, FigurePtr figure,
   FieldPtr field[][8], std::map<FieldPtr, FigurePtr> &mapping);
-  string get_position();
+  string getPosition();
   //virtual void valid_move();
 };
 

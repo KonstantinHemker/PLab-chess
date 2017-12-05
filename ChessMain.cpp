@@ -78,5 +78,9 @@ int main() {
     cb.submitMove("D3", "G6");
     cout << endl;
 
+    //Own tests
+    cb.getPosition("D3");
+
+
     return 0;
 }

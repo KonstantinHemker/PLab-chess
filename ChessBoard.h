@@ -25,23 +25,26 @@ enum Ranks {A,B,C,D,E,F,G,H};
 
 class ChessBoard {
 protected:
-
+/*
   Figure *wKing, *bKing;
   Figure *wQueen, *bQueen;
   Figure *wRook[2], *bRook[2];
   Figure *wBishop[2], *bBishop[2];
   Figure *wKnight[2], *bKnight[2];
-  Figure *wPawn[8], *bPawn[8];
+  Figure *wPawn[8], *bPawn[8];*/
   FieldPtr square[8][8]; //two-dimensional array of pointers to the chess board
-  map<FieldPtr, FigurePtr> mapping;
+  map<Field, Figure> mapping;
 
 
 public:
   ChessBoard ();
+  FigurePtr getPosition(char* pos);
   void submitMove(string currentPosition, string nextPosition);
   void resetBoard();
   //virtual bool valid_move ();
   void set_figures ();
+  int getRank (char character);
+  int getFile (char number);
   //friend ostream& operator << (ostream)
 };
 

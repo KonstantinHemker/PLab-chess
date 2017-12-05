@@ -5,6 +5,7 @@
 
 class Field {
 private:
+  string name;
   bool empty;
 public:
   //Function that checks whether the square is empty
