@@ -9,6 +9,7 @@ class Pawn : public Figure  {
  private:
  public:
   Pawn (string type, bool c, int a, int b);
+  bool validMove (string currPos, string newPos) override;
 };
 
 #endif

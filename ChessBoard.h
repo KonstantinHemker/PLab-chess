@@ -8,11 +8,13 @@
 #include<string>
 #include<sstream>
 #include<map>
+#include<cmath>
 
 //Error Codes
 #define WRONG_TURN -1;
 #define NO_PIECE -2;
 #define INVALID_MOVE -3;
+#define INVALID_DESTINATION -5;
 
 using namespace std;
 
@@ -30,10 +32,11 @@ typedef Field* FieldPtr;
 enum Ranks {A,B,C,D,E,F,G,H};
 
 //General Helper functions
-int getRank(string str);
-int getFile(string str);
+int gR(string str); //abbrev. for getRank
+int gF(string str); //abbrev. for getFile
 
 class ChessBoard {
+friend class Figure;
 protected:
   FigurePtr square[8][8]; //two-dimensional array of pointers to the chess board
   bool turn; //0 --> White's turn || 1 --> black's turn
@@ -49,6 +52,7 @@ public:
   void checkMove(string currPos, string nextPos);
   void switchTurn();
   void printMoveMessage(string currPos, string nextPos);
+  bool getTurn();
   //friend ostream& operator << (ostream)
 };
 

@@ -13,7 +13,10 @@ protected:
 public:
   Figure (string input_type, bool input_colour, int input_rank, int input_file);
   void updatePosition(string newPos);
-  bool valid_destination(string newPos);
+  bool validDestination(FigurePtr square[][8], string newPos, string currPos);
+  void DestinationError (FigurePtr square[][8], string newPos, string currPos);
+  //virtual bool validRoute();
+  virtual bool validMove(string currPos, string newPos) = 0;
   string getType();
   string getPosition();
   bool getColour();

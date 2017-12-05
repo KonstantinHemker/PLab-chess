@@ -10,5 +10,6 @@ class Queen : public Figure {
 //converted ASCII characters
  public:
   Queen(string type, bool c, int a, int b);
+  bool validMove (string currPos, string newPos) override;
 };
 #endif

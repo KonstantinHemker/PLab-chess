@@ -62,9 +62,9 @@ ChessBoard::ChessBoard () {
          return;
       }
       //Make move
-    	square[getRank(newPos)][getFile(newPos)] = square[getRank(currPos)][getFile(currPos)];
-	    square[getRank(currPos)][getFile(currPos)] = NULL;
-      square[getRank(newPos)][getFile(newPos)]->updatePosition(newPos);
+    	square[gR(newPos)][gF(newPos)] = square[gR(currPos)][gF(currPos)];
+	    square[gR(currPos)][gF(currPos)] = NULL;
+      square[gR(newPos)][gF(newPos)]->updatePosition(newPos);
 
       printMoveMessage(currPos, newPos);
 
@@ -75,14 +75,14 @@ ChessBoard::ChessBoard () {
     void ChessBoard::checkMove(string currPos, string newPos) {
 
       //Check WRONG_MOVE
-      if (square[getRank(currPos)][getFile(currPos)] == NULL) {
+      if (square[gR(currPos)][gF(currPos)] == NULL) {
         error_code = NO_PIECE;
         cerr << "There is no piece at position " << currPos << "!" << endl;
         return;
       }
 
       //Check NO_PIECE
-      if (square[getRank(currPos)][getFile(currPos)]-> getColour() != turn) {
+      if (square[gR(currPos)][gF(currPos)]-> getColour() != turn) {
         error_code = WRONG_TURN;
         if (turn == 1) {
         cerr << "It is not White's turn to move" << endl;
@@ -92,9 +92,31 @@ ChessBoard::ChessBoard () {
         cerr << "It is not Black's turn to move" << endl;
         return;
       }
-    }
+
     }
 
+    /*Check Figure specifics*/
+
+    //Movement
+    if (square[gR(currPos)][gF(currPos)]->validMove(newPos, currPos) == false) {
+      error_code = INVALID_MOVE;
+      cerr << "Invalid move of " << square[gR(currPos)][gF(currPos)]->getType();
+      cerr << " from " << currPos << " to " << newPos << endl;
+    }
+    //Route
+
+    //Destination
+    if (square[gR(currPos)][gF(currPos)]->validDestination(square, newPos, currPos) == false)  {
+      square[gR(currPos)][gF(currPos)]->DestinationError(square, newPos, currPos);
+      error_code = INVALID_DESTINATION;
+      return;
+    }
+
+  }
+
+    bool ChessBoard::getTurn() {
+      return turn;
+    }
 
     void ChessBoard::switchTurn() {
       if (turn == 0)
@@ -104,9 +126,9 @@ ChessBoard::ChessBoard () {
     }
 
     void ChessBoard::printMoveMessage(string currPos, string newPos)  {
-      square[getRank(newPos)][getFile(newPos)]-> printColour();
+      square[gR(newPos)][gF(newPos)]-> printColour();
       cout << "'s ";
-      cout << square[getRank(newPos)][getFile(newPos)]-> getType();
+      cout << square[gR(newPos)][gF(newPos)]-> getType();
       cout << " moves from " << currPos << " to " << newPos << endl;
     }
 
@@ -119,13 +141,13 @@ ChessBoard::ChessBoard () {
     }
 
 
-    int getRank (string str) {
+    int gR (string str) {
       char target;
       target = str[0];
       return target-65;
     }
 
-    int getFile (string str) {
+    int gF (string str) {
       char temp = str[1];
       int x = temp - '0';
       return x-1;

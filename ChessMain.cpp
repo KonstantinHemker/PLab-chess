@@ -15,6 +15,11 @@ int main() {
     ChessBoard cb;
     cout << endl;
 
+    /*OWN TESTS */
+    cb.submitMove("A1", "C3");
+    cout << endl;
+
+    /*  PRE WRITTEN TESTS */
     cb.submitMove("D7", "D6");
     cout << endl;
 
@@ -31,7 +36,7 @@ int main() {
     cout << "Alekhine vs. Vasic (1931)" << endl;
     cout << "===========================" << endl;
     cout << endl;
-
+/*
     cb.resetBoard();
     cout << endl;
 
@@ -80,7 +85,7 @@ int main() {
 
     //Own tests
     cb.getPosition("D3");
-
+*/
 
     return 0;
 }

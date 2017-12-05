@@ -9,6 +9,7 @@ class King : public Figure  {
 
  public:
   King(string type, bool c, int a, int b);
+  bool validMove  (string currPos, string newPos) override;
 };
 
 #endif
