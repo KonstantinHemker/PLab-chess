@@ -8,7 +8,7 @@ class King : public Figure  {
  private:
 
  public:
-  King(string type, char c, int a, int b);
+  King(string type, bool c, int a, int b);
 };
 
 #endif

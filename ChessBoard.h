@@ -9,6 +9,11 @@
 #include<sstream>
 #include<map>
 
+//Error Codes
+#define WRONG_TURN -1;
+#define NO_PIECE -2;
+#define INVALID_MOVE -3;
+
 using namespace std;
 
 class King;
@@ -27,17 +32,21 @@ enum Ranks {A,B,C,D,E,F,G,H};
 class ChessBoard {
 protected:
   FigurePtr square[8][8]; //two-dimensional array of pointers to the chess board
-
+  bool turn; //0 --> White's turn || 1 --> black's turn
+  int error_code;
 public:
   ChessBoard ();
   FigurePtr getPosition(string pos);
   void submitMove(string currPos, string nextPos);
   void resetBoard();
-  //virtual bool valid_move ();
-  void setFigures ();
   int getRank(string str);
   int getFile(string str);
+  //virtual bool valid_move ();
+  void setFigures ();
   void printBoard();
+  void checkMove(string currPos, string nextPos);
+  void switchTurn();
+  void printMoveMessage(string currPos, string nextPos);
   //friend ostream& operator << (ostream)
 };
 

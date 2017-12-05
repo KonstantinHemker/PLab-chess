@@ -9,7 +9,7 @@ class Bishop : public Figure {
  private:
 
  public:
-   Bishop(string type, char c, int a, int b);
+   Bishop(string type, bool c, int a, int b);
 };
 
 #endif

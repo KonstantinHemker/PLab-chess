@@ -7,7 +7,7 @@
 class Rook : public Figure  {
  private:
  public:
-  Rook(string type, char c, int a, int b);
+  Rook(string type, bool c, int a, int b);
 };
 
 #endif

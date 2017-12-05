@@ -14,47 +14,52 @@ using namespace std;
 
 ChessBoard::ChessBoard () {
 
-  square[4][0] = new King("King", 'W', 4, 0);
-  square[4][7] = new King("King", 'B', 4, 7);
-  square[3][0] = new Queen("Queen", 'W', 3, 0);
-  square[3][7] = new Queen("Queen", 'B', 3, 7);
-  square[0][0] = new Rook("Rook", 'W', 0, 0);
-  square[7][0] = new Rook("Rook", 'W', 7, 0);
-  square[0][7] = new Rook("Rook", 'B', 0, 7);
-  square[7][7] = new Rook("Rook", 'B', 7, 7);
-  square[1][0] = new Knight("Knight", 'W', 1, 0);
-  square[6][0] = new Knight("Knight", 'W', 6, 0);
-  square[1][7] = new Knight("Knight", 'B', 1, 7);
-  square[6][7] = new Knight("Knight", 'B', 6, 7);
-  square[2][0] = new Bishop("Bishop", 'W', 2, 0);
-  square[5][0] = new Bishop("Bishop", 'W', 5, 0);
-  square[2][7] = new Bishop("Bishop", 'B', 2, 7);
-  square[5][7] = new Bishop("Bishop", 'B', 5, 7);
+  turn = 0; //White always begins
+  error_code = 0;
+
+  square[4][0] = new King("King", 0, 4, 0);
+  square[4][7] = new King("King", 1, 4, 7);
+  square[3][0] = new Queen("Queen", 0, 3, 0);
+  square[3][7] = new Queen("Queen", 1, 3, 7);
+  square[0][0] = new Rook("Rook", 0, 0, 0);
+  square[7][0] = new Rook("Rook", 0, 7, 0);
+  square[0][7] = new Rook("Rook", 1, 0, 7);
+  square[7][7] = new Rook("Rook", 1, 7, 7);
+  square[1][0] = new Knight("Knight", 0, 1, 0);
+  square[6][0] = new Knight("Knight", 0, 6, 0);
+  square[1][7] = new Knight("Knight", 1, 1, 7);
+  square[6][7] = new Knight("Knight", 1, 6, 7);
+  square[2][0] = new Bishop("Bishop", 0, 2, 0);
+  square[5][0] = new Bishop("Bishop", 0, 5, 0);
+  square[2][7] = new Bishop("Bishop", 1, 2, 7);
+  square[5][7] = new Bishop("Bishop", 1, 5, 7);
 
   for (int i = 0; i<8; i++)
-    square[i][1] = new Pawn("Pawn", 'W', i, 1);
+    square[i][1] = new Pawn("Pawn", 0, i, 1);
 
   for (int c = 0; c < 8 ; c++)
-    square[c][6] = new Pawn("Pawn", 'B', c, 6);
+    square[c][6] = new Pawn("Pawn", 1, c, 6);
 
   for (int i = 0; i < 8 ; i++) {
     for (int c = 2; c < 7; c++)
       square[i][c] = NULL;
     }
-  }
+
+    cout << "A new chess game is started" << endl;
+}
 
     FigurePtr ChessBoard::getPosition(string pos) {
-      cout << pos[0] << endl;
+      //
 
     }
 
-    int getRank (string str) {
+    int ChessBoard::getRank (string str) {
       char target;
       target = str[0];
       return target-65;
     }
 
-    int getFile (string str) {
+    int ChessBoard::getFile (string str) {
       char temp = str[1];
       int x = temp - '0';
       return x;
@@ -68,12 +73,53 @@ ChessBoard::ChessBoard () {
     }
     void ChessBoard::submitMove(string currPos, string nextPos) {
       //Check move
-      cout << getRank(currPos) << " " << getFile(currPos) << endl;
+      checkMove(currPos, nextPos);
+      if (error_code != 0)
+        return;
+
       //Make move
-      //square[getRank(nextPos)][getFile(nextPos)] = square[getRank(currPos)][getFile(currPos)];
-      //square[getRank(currPos)][getFile(currPos)] = NULL;
+    	square[getRank(nextPos)][getFile(nextPos)] = square[getRank(currPos)][getFile(currPos)];
+	    square[getRank(currPos)][getFile(currPos)] = NULL;
+
+      printMoveMessage(currPos, nextPos);
+
+      switchTurn();
     }
 
+
+    void ChessBoard::checkMove(string currPos, string nextPos) {
+      //Check NO_PIECE
+      if (square[getRank(currPos)][getFile(currPos)] == NULL) {
+        error_code = NO_PIECE;
+        cerr << "There is no piece at position " << currPos << "!" << endl;
+        return;
+      }
+
+      //Check WRONG_MOVE
+      if (square[getRank(currPos)][getFile(currPos)]-> getColour() != turn) {
+        error_code = WRONG_TURN;
+        if (turn == 1)
+          cerr << "It is not White's turn to move" << endl;
+        else
+          cerr << "It is not Black's turn to move" << endl;
+        return;
+      }
+
+    }
+
+    void ChessBoard::switchTurn() {
+      if (turn == 0)
+        turn = 1;
+      else
+        turn = 0;
+    }
+
+    void ChessBoard::printMoveMessage(string currPos, string nextPos)  {
+      square[getRank(currPos)][getFile(currPos)]-> printColour();
+      cout << "'s ";
+      cout << square[getRank(currPos)][getFile(currPos)]-> getType();
+      cout << " moves from " << currPos << " to " << nextPos << endl;
+    }
 
     void ChessBoard::resetBoard()  {
       return;

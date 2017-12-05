@@ -8,7 +8,7 @@
 class Knight : public Figure  {
  private:
  public:
-  Knight(string type, char c, int a, int b);
+  Knight(string type, bool c, int a, int b);
 };
 
 #endif

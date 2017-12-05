@@ -9,6 +9,6 @@ class Queen : public Figure {
  private:
 //converted ASCII characters
  public:
-  Queen(string type, char c, int a, int b);
+  Queen(string type, bool c, int a, int b);
 };
 #endif

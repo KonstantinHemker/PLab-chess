@@ -2,6 +2,6 @@
 
 #include "Rook.h"
 
-Rook::Rook(string type, char c, int a, int b) : Figure (type, c, a, b) {
+Rook::Rook(string type, bool c, int a, int b) : Figure (type, c, a, b) {
   //tbc
 }

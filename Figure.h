@@ -9,13 +9,15 @@ protected:
   string type;
   char rank; //horizontal position
   int file; //vertical position
-  char colour;
+  bool colour; //0 --> white || 1--> black
 public:
-  Figure (string input_type, char input_colour, int input_rank, int input_file);
+  Figure (string input_type, bool input_colour, int input_rank, int input_file);
   string getType();
   void setPosition(char input_rank, int input_file, FigurePtr figure,
   FieldPtr field[][8], std::map<FieldPtr, FigurePtr> &mapping);
   string getPosition();
+  bool getColour();
+  void printColour();
   //virtual void valid_move();
 };
 
