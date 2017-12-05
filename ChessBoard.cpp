@@ -13,40 +13,80 @@
 using namespace std;
 
 ChessBoard::ChessBoard () {
-  King king[2];
-  Queen queen[2];
-  Rook rook[4];
-  Bishop bishop[4];
-  Knight knight[4];
-  Pawn pawn[16];
-  //Create the chessboard in a 2D array of pointers to objects
-//initialise pointers
-/*
-FigurePtr wKing = new King;
-FigurePtr bKing = new King;
-FigurePtr wQueen = new Queen;
-FigurePtr bQueen = new Queen;
-FigurePtr wRook[0] = new Rook;
-FigurePtr wRook[1] = new Rook;
-FigurePtr bRook[0] = new Rook;
-FigurePtr bRook[1] = new Rook;
-FigurePtr wBishop[0] = new Bishop;
-FigurePtr wBishop[1] = new Bishop;
-FigurePtr bBishop[0] = new Bishop;
-FigurePtr bBishop[1] = new Bishop;
-FigurePtr wKnight[0] = new Knight;
-FigurePtr wKnight[1] = new Knight;
-FigurePtr bKnight[0] = new Knight;
-FigurePtr bKnight[1] = new Knight;
 
-for (int i = 0; i<8; i++)
-  FigurePtr wPawn[i] = new Pawn;
+  square[4][0] = new King("King", 'W', 4, 0);
+  square[4][7] = new King("King", 'B', 4, 7);
+  square[3][0] = new Queen("Queen", 'W', 3, 0);
+  square[3][7] = new Queen("Queen", 'B', 3, 7);
+  square[0][0] = new Rook("Rook", 'W', 0, 0);
+  square[7][0] = new Rook("Rook", 'W', 7, 0);
+  square[0][7] = new Rook("Rook", 'B', 0, 7);
+  square[7][7] = new Rook("Rook", 'B', 7, 7);
+  square[1][0] = new Knight("Knight", 'W', 1, 0);
+  square[6][0] = new Knight("Knight", 'W', 6, 0);
+  square[1][7] = new Knight("Knight", 'B', 1, 7);
+  square[6][7] = new Knight("Knight", 'B', 6, 7);
+  square[2][0] = new Bishop("Bishop", 'W', 2, 0);
+  square[5][0] = new Bishop("Bishop", 'W', 5, 0);
+  square[2][7] = new Bishop("Bishop", 'B', 2, 7);
+  square[5][7] = new Bishop("Bishop", 'B', 5, 7);
 
-for (int c = 0; c<8; c++)
-  FigurePtr bPawn[i] = new Pawn;
-*/
+  for (int i = 0; i<8; i++)
+    square[i][1] = new Pawn("Pawn", 'W', i, 1);
 
-  wKing = &king[0];
+  for (int c = 0; c < 8 ; c++)
+    square[c][6] = new Pawn("Pawn", 'B', c, 6);
+
+  for (int i = 0; i < 8 ; i++) {
+    for (int c = 2; c < 7; c++)
+      square[i][c] = NULL;
+    }
+  }
+
+    FigurePtr ChessBoard::getPosition(string pos) {
+      cout << pos[0] << endl;
+
+    }
+
+    int getRank (string str) {
+      char target;
+      target = str[0];
+      return target-65;
+    }
+
+    int getFile (string str) {
+      char temp = str[1];
+      int x = temp - '0';
+      return x;
+      /*
+      char temp = str[1];
+      int temp2;
+      //const char* temp2 = str[1];
+      temp2 = atoi(temp);
+      temp2 -= 1;
+      return temp2;*/
+    }
+    void ChessBoard::submitMove(string currPos, string nextPos) {
+      //Check move
+      cout << getRank(currPos) << " " << getFile(currPos) << endl;
+      //Make move
+      //square[getRank(nextPos)][getFile(nextPos)] = square[getRank(currPos)][getFile(currPos)];
+      //square[getRank(currPos)][getFile(currPos)] = NULL;
+    }
+
+
+    void ChessBoard::resetBoard()  {
+      return;
+    }
+
+    void ChessBoard::printBoard() {
+      return;
+    }
+
+
+
+
+  /*
   bKing = &king[1];
   wQueen = &queen[0];
   bQueen = &queen[1];
@@ -71,18 +111,17 @@ for (int c = 0; c<8; c++)
     bPawn[i-8] = &pawn[i];
   //Create the figures and initialise them on the board
 
-  Field field[8][8];
 
   for (int n = 0; n < 8; n++)  {
     for (int c = 0; c < 8; c++)
     square[n][c] = &field[n][c];
   }
+*/
+  //setFigures();
 
-  set_figures();
 
-}
-
-void ChessBoard::set_figures()  {
+/*
+void ChessBoard::setFigures()  {
   //Create white team
    wKing->setPosition('E', 1, wKing, square, mapping);
    wQueen->setPosition('D',1, wQueen, square, mapping);
@@ -113,34 +152,10 @@ void ChessBoard::set_figures()  {
     bPawn[i-65]->setPosition(i, 7, bPawn[i-65], square, mapping);
 }
 }
+*/
 
-
-FigurePtr ChessBoard::getPosition(char pos[]) {
-  cout << pos[0] << endl;
-  cout << pos[1] << endl;
-  cout << mapping[square[0][1]] << endl;
-  //return mapping[square[getRank(pos[0])][getFile(pos[1])]];
-}
-
-int getRank (char character) {
-  return character-65;
-}
-
-int getFile (char number) {
-  return number-1;
-}
 
 
 //void ChessBoard::printPosition(string pos) {
 
 //}
-
-
-
-void ChessBoard::submitMove(string currentPosition, string nextPosition) {
-  return;
-}
-
-void ChessBoard::resetBoard()  {
-  return;
-}

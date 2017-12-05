@@ -1,6 +1,6 @@
 //Implementation file for king
 #include "King.h"
 
-//ing::King (char a, int b) : Figure (a, b)  {
+King::King (string type, char c, int a, int b) : Figure (type, c, a, b)  {
   //tbc
-//}
+}
