@@ -12,9 +12,9 @@ protected:
   bool colour; //0 --> white || 1--> black
 public:
   Figure (string input_type, bool input_colour, int input_rank, int input_file);
+  void updatePosition(string newPos);
+  bool valid_destination(string newPos);
   string getType();
-  void setPosition(char input_rank, int input_file, FigurePtr figure,
-  FieldPtr field[][8], std::map<FieldPtr, FigurePtr> &mapping);
   string getPosition();
   bool getColour();
   void printColour();

@@ -29,6 +29,10 @@ typedef Figure* FigurePtr;
 typedef Field* FieldPtr;
 enum Ranks {A,B,C,D,E,F,G,H};
 
+//General Helper functions
+int getRank(string str);
+int getFile(string str);
+
 class ChessBoard {
 protected:
   FigurePtr square[8][8]; //two-dimensional array of pointers to the chess board
@@ -39,8 +43,6 @@ public:
   FigurePtr getPosition(string pos);
   void submitMove(string currPos, string nextPos);
   void resetBoard();
-  int getRank(string str);
-  int getFile(string str);
   //virtual bool valid_move ();
   void setFigures ();
   void printBoard();
