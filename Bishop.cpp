@@ -6,12 +6,10 @@ Bishop::Bishop(string type, bool c, int a, int b) : Figure (type, c, a, b) {
 }
 
 bool Bishop::validMove(string currPos, string newPos) {
-  int horizontal = file - gF(newPos);
-  int vertical = rank - gR(newPos);
-  cout << "Vertical steps: " << vertical << endl;
-  cout << "Horizontal steps: " << horizontal << endl;
+  int horizontal = gF(newPos)-file;
+  int vertical = gR(newPos)-rank;
 
-  if ((abs(horizontal)) == (abs(vertical)))
+  if (abs(horizontal) == abs(vertical))
     return true;
 
   return false;

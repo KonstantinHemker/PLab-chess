@@ -7,7 +7,7 @@
 class Figure  {
 protected:
   string type;
-  char rank; //horizontal position
+  int rank; //horizontal position
   int file; //vertical position
   bool colour; //0 --> white || 1--> black
 public:

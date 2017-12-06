@@ -16,8 +16,12 @@ int main() {
     cout << endl;
 
     /*OWN TESTS */
-    cb.submitMove("A1", "C3");
+    //Check Bishops Move Invalid
+    cb.submitMove("C1", "C3");
     cout << endl;
+
+    //Check Bishops Move valid
+    cb.submitMove("C1", "A3");
 
     /*  PRE WRITTEN TESTS */
     cb.submitMove("D7", "D6");
