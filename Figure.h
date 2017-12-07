@@ -10,9 +10,12 @@ protected:
   int rank; //horizontal position
   int file; //vertical position
   bool colour; //0 --> white || 1--> black
+  string legalMove[50];
 public:
   Figure (string input_type, bool input_colour, int input_rank, int input_file);
-  void updatePosition(string newPos);
+  void updatePosition(FigurePtr square[][8], string newPos);
+  void getValidMoves(FigurePtr square[][8]);
+  string createNewPos(int i, int c);
   //Function that checks whether the destination is either a
   bool validDestination(FigurePtr square[][8], string newPos, string currPos);
   void DestinationError (FigurePtr square[][8], string newPos, string currPos);
@@ -23,7 +26,7 @@ public:
   //Note that for the knight, the pawn and the king, the second check is not necessary,
   //because they don't pass any other fields before their destination (e.g. only can)
   //move one step
-  void validStep(FigurePtr square[][8], string newPos, string currPos, int error_code);
+  bool validStep(FigurePtr square[][8], string newPos, string currPos, int &error_code);
 
   virtual bool validRoute(FigurePtr square[][8], string currPos, string newPos);
   virtual bool validMove(FigurePtr square[][8], string currPos, string newPos) = 0;

@@ -2,7 +2,7 @@
 #include "Pawn.h"
 
 Pawn::Pawn(string type, bool c, int a, int b) : Figure (type, c, a, b) {
-  //tbc
+  //tbccd
 }
 
 bool Pawn::validMove(FigurePtr square[][8], string currPos, string newPos)  {
@@ -54,10 +54,3 @@ bool Pawn::validMove(FigurePtr square[][8], string currPos, string newPos)  {
   return false;
 
 }
-
-/*
-bool Pawn::validRoute(FigurePtr square[][8], string currPos, string newPos) {
-  //deliberately empty
-  //no route check required as the destination is the only step in the route
-}
-*/

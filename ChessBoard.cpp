@@ -48,9 +48,18 @@ ChessBoard::ChessBoard () {
     cout << "A new chess game is started" << endl;
 }
 
+ChessBoard::~ChessBoard() {
+
+  for (int i = 0; i < 8; i++) {
+    for (int c = 0; c < 8; c++) {
+      if (square[i][c] != NULL)
+        delete square[i][c]; // Imperial College?
+    }
+  }
+}
+
     FigurePtr ChessBoard::getPosition(string pos) {
       //
-
     }
 
 
@@ -64,7 +73,7 @@ ChessBoard::ChessBoard () {
       //Make move
     	square[gF(newPos)][gR(newPos)] = square[gF(currPos)][gR(currPos)];
 	    square[gF(currPos)][gR(currPos)] = NULL;
-      square[gF(newPos)][gR(newPos)]->updatePosition(newPos);
+      square[gF(newPos)][gR(newPos)]->updatePosition(square, newPos);
 
       printMoveMessage(currPos, newPos);
 
@@ -95,25 +104,7 @@ ChessBoard::ChessBoard () {
 
     }
 
-    //square[gF(currPos)][gR(currPos)]-> validStep(square, currPos, newPos, error_code);
-
-
-    /*Check Figure specifics*/
-    //Movement
-
-    if (square[gF(currPos)][gR(currPos)]->validMove(square, currPos, newPos) == false) {
-      error_code = INVALID_MOVE;
-      cerr << "Invalid move of " << square[gF(currPos)][gR(currPos)]->getType();
-      cerr << " from " << currPos << " to " << newPos << endl;
-    }
-    //Route
-
-    //Destination
-    if (square[gF(currPos)][gR(currPos)]->validDestination(square, newPos, currPos) == false)  {
-      square[gF(currPos)][gR(currPos)]->DestinationError(square, newPos, currPos);
-      error_code = INVALID_DESTINATION;
-      return;
-    }
+    square[gF(currPos)][gR(currPos)]-> validStep(square, currPos, newPos, error_code);
 
   }
 
@@ -138,7 +129,47 @@ ChessBoard::ChessBoard () {
     }
 
     void ChessBoard::resetBoard()  {
-      return;
+
+
+      for (int i = 0; i < 8; i++) {
+        for (int c = 0; c < 8; c++) {
+          if (square[i][c] != NULL)
+            delete square[i][c]; // Imperial College?
+          }
+      }
+
+      turn = 0; //White always begins
+      error_code = 0;
+
+      square[4][0] = new King("King", 0, 4, 0);
+      square[4][7] = new King("King", 1, 4, 7);
+      square[3][0] = new Queen("Queen", 0, 3, 0);
+      square[3][7] = new Queen("Queen", 1, 3, 7);
+      square[0][0] = new Rook("Rook", 0, 0, 0);
+      square[7][0] = new Rook("Rook", 0, 7, 0);
+      square[0][7] = new Rook("Rook", 1, 0, 7);
+      square[7][7] = new Rook("Rook", 1, 7, 7);
+      square[1][0] = new Knight("Knight", 0, 1, 0);
+      square[6][0] = new Knight("Knight", 0, 6, 0);
+      square[1][7] = new Knight("Knight", 1, 1, 7);
+      square[6][7] = new Knight("Knight", 1, 6, 7);
+      square[2][0] = new Bishop("Bishop", 0, 2, 0);
+      square[5][0] = new Bishop("Bishop", 0, 5, 0);
+      square[2][7] = new Bishop("Bishop", 1, 2, 7);
+      square[5][7] = new Bishop("Bishop", 1, 5, 7);
+
+      for (int i = 0; i<8; i++)
+        square[i][1] = new Pawn("Pawn", 0, i, 1);
+
+      for (int c = 0; c < 8 ; c++)
+        square[c][6] = new Pawn("Pawn", 1, c, 6);
+
+      for (int i = 0; i < 8 ; i++) {
+        for (int c = 2; c < 6; c++)
+          square[i][c] = NULL;
+        }
+
+      cout << "A new chess game is started" << endl;
     }
 
     void ChessBoard::printBoard() {
@@ -146,12 +177,6 @@ ChessBoard::ChessBoard () {
     }
 
     int gF (string str) {
-      /*
-      char temp = str[0];
-      int x = temp - '0';
-      return x-1;
-      */
-
       char target;
       target = str[0];
       return target-65;

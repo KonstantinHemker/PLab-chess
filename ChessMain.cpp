@@ -20,8 +20,12 @@ int main() {
     cb.submitMove("F1", "F3");
     cout << endl;
 
-    //Check Bishops Move valid
+    //Check Bishops Move valid - not anymore
     cb.submitMove("F1", "H3");
+    cout << endl;
+
+    //Check Rook route invalidx
+    cb.submitMove("A1", "A5");
     cout << endl;
 
     //Black Movement
@@ -66,7 +70,7 @@ int main() {
 
     //Check White's pawn valid
     cb.submitMove("D2", "D3");
-
+    cout << endl;
 
     /*  PRE WRITTEN TESTS */
     cb.submitMove("D7", "D6");
@@ -85,7 +89,7 @@ int main() {
     cout << "Alekhine vs. Vasic (1931)" << endl;
     cout << "===========================" << endl;
     cout << endl;
-/*
+
     cb.resetBoard();
     cout << endl;
 
@@ -132,9 +136,6 @@ int main() {
     cb.submitMove("D3", "G6");
     cout << endl;
 
-    //Own tests
-    cb.getPosition("D3");
-*/
 
     return 0;
 }

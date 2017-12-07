@@ -44,6 +44,7 @@ protected:
   int error_code;
 public:
   ChessBoard ();
+  virtual ~ChessBoard();
   FigurePtr getPosition(string pos);
   void submitMove(string currPos, string nextPos);
   void resetBoard();

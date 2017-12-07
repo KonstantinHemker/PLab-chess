@@ -10,28 +10,34 @@ Figure::Figure(string input_type, bool input_colour, int input_file, int input_r
   //cout << "Figure " << this << " has rank " << rank << " and file " << file << endl;
 }
 
-void Figure::updatePosition(string newPos)  {
+void Figure::updatePosition(FigurePtr square[][8], string newPos)  {
+
   file = gF(newPos);
   rank = gR(newPos);
+
+  square[file][rank]->getValidMoves(square);
+
 }
 
 
-void Figure::validStep(FigurePtr square[][8], string newPos, string currPos, int error_code) {
+bool Figure::validStep(FigurePtr square[][8], string currPos, string newPos, int &error_code) {
 
   //Check the whether the move is legal for respective figure
   if (square[gF(currPos)][gR(currPos)]->validMove(square, currPos, newPos) == false) {
     error_code = INVALID_MOVE;
     cerr << "Invalid move of " << square[gF(currPos)][gR(currPos)]->getType();
     cerr << " from " << currPos << " to " << newPos << endl;
-    return;
+    return false;
   }
 
-
   //Destination
-  if (square[gF(currPos)][gR(currPos)]->validDestination(square, newPos, currPos) == false)  {
-    square[gF(currPos)][gR(currPos)]->DestinationError(square, newPos, currPos);
+  if (square[gF(currPos)][gR(currPos)]->validDestination(square, currPos, newPos) == false)  {
     error_code = INVALID_DESTINATION;
-    return;
+    cerr << "Invalid Destination for ";
+    square[gF(currPos)][gR(currPos)]->printColour();
+    cerr << "'s move attempt ";
+    cerr << "to move from " << currPos << " to " << newPos << endl;
+    return false;
   }
 
   //Route
@@ -39,9 +45,53 @@ void Figure::validStep(FigurePtr square[][8], string newPos, string currPos, int
     error_code = INVALID_ROUTE;
     cerr << "Invalid route of " << square[gF(currPos)][gR(currPos)]->getType();
     cerr << " from " << currPos << " to " << newPos << endl;
+    return false;
+  }
+}
+
+void Figure::getValidMoves(FigurePtr square[][8]) {
+  string newPos;
+  string currPos = getPosition();
+  int count = 0;
+
+  for (int i = 0; i < 8; i++) {
+    for (int c = 0; c < 8; c++) {
+      newPos = createNewPos(i, c);
+      if ((square[rank][file] -> validRoute(square, currPos, newPos) == true) &&
+	       (square[rank][file]->validDestination(square, currPos, newPos) == true) &&
+	       (square[rank][file]->validMove(square, currPos, newPos) == true)) {
+        legalMove[count] = newPos;
+        count++;
+      }
+    }
   }
 
+  //Loop through all fields on the board and check whether they are a valid move
 
+  //do something
+}
+
+string Figure::createNewPos(int i, int c)  {
+  string file; //Note that this is deliberately temporarily overloading the variable name
+  string rank;
+  string output;
+
+  file = i + 65; //corresponds to ASCII table letter
+  rank = c + 49; //corresponds to ASCII table digits
+  output = file + rank;
+
+  return output;
+}
+
+string Figure::getPosition() {
+  string letter;
+  string number;
+
+  letter = file + 65;
+  number = rank + 49;
+  string output = letter + number;
+
+  return output;
 }
 
 bool Figure::validRoute(FigurePtr square[][8], string currPos, string newPos) {
@@ -49,7 +99,7 @@ bool Figure::validRoute(FigurePtr square[][8], string currPos, string newPos) {
   return true; //will be adjusted for the rook, the queen and the bishop
 }
 
-bool Figure::validDestination(FigurePtr square[][8], string newPos, string currPos)  {
+bool Figure::validDestination(FigurePtr square[][8], string currPos, string newPos)  {
 
   //Validity Condition(1): Empty field
   if (square[gF(newPos)][gR(newPos)] == NULL)
@@ -63,32 +113,21 @@ bool Figure::validDestination(FigurePtr square[][8], string newPos, string currP
   if (square[gF(newPos)][gR(newPos)]-> getColour() != square[gF(currPos)][gR(currPos)]->getColour())
     return true;
 
+
+
   return false;
 }
 
+
 /*
-virtual bool Figure::validRoute(string currPos, string newPos)  {
-
-  createRoute(string currPos, newPos);
-
-}
-*/
-
-
-
 void Figure::DestinationError(FigurePtr square[][8], string newPos, string currPos) {
   cerr << "Invalid Destination for ";
   square[gF(currPos)][gR(currPos)]->printColour();
   cerr << "'s move attempt ";
   cerr << "to move from " << currPos << " to " << newPos << endl;
 }
+*/
 
-
-string Figure::getPosition()  {
-  string temp;
-  temp = rank + file;
-  return temp;
-}
 
 string Figure::getType()  {
   return type;
