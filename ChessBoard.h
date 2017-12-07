@@ -14,6 +14,7 @@
 #define WRONG_TURN -1;
 #define NO_PIECE -2;
 #define INVALID_MOVE -3;
+#define INVALID_ROUTE -4;
 #define INVALID_DESTINATION -5;
 
 using namespace std;

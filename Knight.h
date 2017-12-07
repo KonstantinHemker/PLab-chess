@@ -9,7 +9,7 @@ class Knight : public Figure  {
  private:
  public:
   Knight(string type, bool c, int a, int b);
-  bool validMove (string currPos, string newPos) override;
+  bool validMove (FigurePtr square[][8], string currPos, string newPos) override;
 };
 
 #endif

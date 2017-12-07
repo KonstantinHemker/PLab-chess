@@ -15,6 +15,40 @@ void Figure::updatePosition(string newPos)  {
   rank = gR(newPos);
 }
 
+
+void Figure::validStep(FigurePtr square[][8], string newPos, string currPos, int error_code) {
+
+  //Check the whether the move is legal for respective figure
+  if (square[gF(currPos)][gR(currPos)]->validMove(square, currPos, newPos) == false) {
+    error_code = INVALID_MOVE;
+    cerr << "Invalid move of " << square[gF(currPos)][gR(currPos)]->getType();
+    cerr << " from " << currPos << " to " << newPos << endl;
+    return;
+  }
+
+
+  //Destination
+  if (square[gF(currPos)][gR(currPos)]->validDestination(square, newPos, currPos) == false)  {
+    square[gF(currPos)][gR(currPos)]->DestinationError(square, newPos, currPos);
+    error_code = INVALID_DESTINATION;
+    return;
+  }
+
+  //Route
+  if (square[gF(currPos)][gR(currPos)]->validRoute(square, newPos, currPos) == false) {
+    error_code = INVALID_ROUTE;
+    cerr << "Invalid route of " << square[gF(currPos)][gR(currPos)]->getType();
+    cerr << " from " << currPos << " to " << newPos << endl;
+  }
+
+
+}
+
+bool Figure::validRoute(FigurePtr square[][8], string currPos, string newPos) {
+
+  return true; //will be adjusted for the rook, the queen and the bishop
+}
+
 bool Figure::validDestination(FigurePtr square[][8], string newPos, string currPos)  {
 
   //Validity Condition(1): Empty field

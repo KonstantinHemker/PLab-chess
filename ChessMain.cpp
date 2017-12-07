@@ -17,11 +17,56 @@ int main() {
 
     /*OWN TESTS */
     //Check Bishops Move Invalid
-    cb.submitMove("C1", "C3");
+    cb.submitMove("F1", "F3");
     cout << endl;
 
     //Check Bishops Move valid
-    cb.submitMove("C1", "A3");
+    cb.submitMove("F1", "H3");
+    cout << endl;
+
+    //Black Movement
+    cb.submitMove("C8", "A6");
+    cout << endl;
+
+    //Check King's move invalid
+    cb.submitMove("E1", "E2");
+    cout << endl;
+
+    //Check King's move valid
+    cb.submitMove("E1", "F1");
+    cout << endl;
+
+    //Check Black's Rook Invali
+    cb.submitMove("A8", "C6");
+    cout << endl;
+
+    //Check Black's Rook valid
+    cb.submitMove("A8", "A5");
+    cout << endl;
+
+    //Check White's Knight invalid
+    cb.submitMove("B1", "B3");
+    cout << endl;
+
+    //Check White's Knight invalid
+    cb.submitMove("B1", "C3");
+    cout << endl;
+
+    //Check Black's Queen invalid`
+    cb.submitMove("D8", "F4");
+    cout << endl;
+
+    //Check Black's Queen valid;
+    cb.submitMove("D8", "D4");
+    cout << endl;
+
+    //Check White's pawn invalid
+    cb.submitMove("D2", "E3");
+    cout << endl;
+
+    //Check White's pawn valid
+    cb.submitMove("D2", "D3");
+
 
     /*  PRE WRITTEN TESTS */
     cb.submitMove("D7", "D6");

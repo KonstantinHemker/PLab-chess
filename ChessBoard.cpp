@@ -95,10 +95,13 @@ ChessBoard::ChessBoard () {
 
     }
 
-    /*Check Figure specifics*/
+    //square[gF(currPos)][gR(currPos)]-> validStep(square, currPos, newPos, error_code);
 
+
+    /*Check Figure specifics*/
     //Movement
-    if (square[gF(currPos)][gR(currPos)]->validMove(currPos, newPos) == false) {
+
+    if (square[gF(currPos)][gR(currPos)]->validMove(square, currPos, newPos) == false) {
       error_code = INVALID_MOVE;
       cerr << "Invalid move of " << square[gF(currPos)][gR(currPos)]->getType();
       cerr << " from " << currPos << " to " << newPos << endl;
@@ -111,6 +114,7 @@ ChessBoard::ChessBoard () {
       error_code = INVALID_DESTINATION;
       return;
     }
+
   }
 
 

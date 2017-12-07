@@ -5,7 +5,7 @@ King::King (string type, bool c, int a, int b) : Figure (type, c, a, b)  {
   //tbc
 }
 
-bool King::validMove(string currPos, string newPos) {
+bool King::validMove(FigurePtr square[][8], string currPos, string newPos) {
   int horizontal = gF(newPos)-file;
   int vertical = gR(newPos)-rank;
 
@@ -16,5 +16,12 @@ bool King::validMove(string currPos, string newPos) {
   if ((abs(horizontal) == abs(vertical)) && (abs(vertical)) == 1)
     return true;
 
-  return false; 
+  return false;
 }
+
+/*
+bool King::validRoute(FigurePtr square[][8], string currPos, string newPos) {
+  //deliberately Empty
+  //no route check required as the destination is the only step in the route
+}
+*/
