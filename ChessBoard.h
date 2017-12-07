@@ -12,10 +12,12 @@
 
 //Error Codes
 #define WRONG_TURN -1;
-#define NO_PIECE -2;
-#define INVALID_MOVE -3;
-#define INVALID_ROUTE -4;
-#define INVALID_DESTINATION -5;
+#define OUT_OF_BOUNDS -2;
+#define NO_PIECE -3;
+#define INVALID_MOVE -4;
+#define INVALID_ROUTE -5;
+#define INVALID_DESTINATION -6;
+
 
 using namespace std;
 
@@ -52,6 +54,7 @@ public:
   void setFigures ();
   void printBoard();
   void checkMove(string currPos, string nextPos);
+  bool checkInput (string input);
   void switchTurn();
   void printMoveMessage(string currPos, string nextPos);
   bool getTurn();

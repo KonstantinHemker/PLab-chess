@@ -15,8 +15,13 @@ void Figure::updatePosition(FigurePtr square[][8], string newPos)  {
   file = gF(newPos);
   rank = gR(newPos);
 
-  square[file][rank]->getValidMoves(square);
-
+  //Update the legal moves for each figure on the field
+  for (int i = 0; i < 8; i++) {
+    for (int c = 0; c < 8; c++) {
+    if (square[i][c] != NULL)
+      square[i][c]->getValidMoves(square);
+    }
+  }
 }
 
 

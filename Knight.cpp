@@ -28,9 +28,3 @@ bool Knight::validMove(FigurePtr square[][8], string currPos, string newPos) {
 
   return false;
 }
-/*
-bool Knight::validRoute(FigurePtr square[][8], string currPos, string newPos) {
-  //deliberately empty
-  //no route check required as the destination is the only step on the route
-}
-*/

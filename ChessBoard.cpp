@@ -34,9 +34,11 @@ ChessBoard::ChessBoard () {
   square[2][7] = new Bishop("Bishop", 1, 2, 7);
   square[5][7] = new Bishop("Bishop", 1, 5, 7);
 
+  //White Pawns
   for (int i = 0; i<8; i++)
     square[i][1] = new Pawn("Pawn", 0, i, 1);
 
+  //Black Pawns
   for (int c = 0; c < 8 ; c++)
     square[c][6] = new Pawn("Pawn", 1, c, 6);
 
@@ -90,6 +92,14 @@ ChessBoard::~ChessBoard() {
         return;
       }
 
+      //Check OUT_OF_BOUNDS
+      if ((checkInput(currPos) == false) || (checkInput(newPos) == false)) {
+        error_code = OUT_OF_BOUNDS;
+        cerr << "Wrong input!" << endl;
+        return;
+      }
+
+
       //Check NO_PIECE
       if (square[gF(currPos)][gR(currPos)]-> getColour() != turn) {
         error_code = WRONG_TURN;
@@ -108,7 +118,15 @@ ChessBoard::~ChessBoard() {
 
   }
 
+  bool ChessBoard::checkInput(string input) {
+    int number = gR(input);
+    int letter = gF(input);
 
+    if ((number < 0) || (number > 7) || (letter < 0) || (letter > 7))
+      return false;
+
+    return true;
+  }
 
     bool ChessBoard::getTurn() {
       return turn;

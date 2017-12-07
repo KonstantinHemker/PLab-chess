@@ -22,15 +22,18 @@ bool Pawn::validMove(FigurePtr square[][8], string currPos, string newPos)  {
     if ((rank > 1) && (vertical == 2))
 
     //Condition(2): Immediate diagonal fields
+    if (file < 7) { //avoids the rightmost edge case
     if (square[file+1][rank+1] != NULL) {
       if ((square[file+1][rank+1]->getColour() != 0) && (vertical == 1) && (horizontal == 1))
         return true;
     }
-
-    if (square[file+1][rank-1] != NULL) {
-      if ((square[file+1][rank-1]->getColour() != 0) && (vertical == 1) && (horizontal == -1))
+  }
+    if (file > 0) { // avoids the leftmost edge case
+    if (square[file-1][rank+1] != NULL) {
+      if ((square[file-1][rank+1]->getColour() != 0) && (vertical == -1) && (horizontal == 1))
         return true;
     }
+  }
 
   //Condition(1): Colour Black
   if (colour == 1)  {
@@ -39,13 +42,16 @@ bool Pawn::validMove(FigurePtr square[][8], string currPos, string newPos)  {
     if ((rank < 6) && (vertical == -1))
       return true;
 
-
-  if (square[file-1][rank+1] != NULL) {
-    if ((square[file-1][rank+1]->getColour() != 1) && (vertical == -1) && (horizontal == 1))
+  if (file < 7) { //avoids the rightmost edge case
+  if (square[file-1][rank-1] != NULL) {
+    if ((square[file-1][rank-1]->getColour() != 1) && (vertical == -1) && (horizontal == -1))
       return true;
     }
-  if (square[file-1][rank-1] != NULL) {
-    if ((square[file-1][rank-1]->getColour() != 1)  && (vertical == -1) && (horizontal == -1))
+  }
+
+  if (file > 0)
+  if (square[file+1][rank-1] != NULL) {
+    if ((square[file+1][rank-1]->getColour() != 1)  && (vertical == 1) && (horizontal == -1))
       return true;
     }
 

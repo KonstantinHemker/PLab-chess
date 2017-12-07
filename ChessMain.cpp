@@ -16,6 +16,11 @@ int main() {
     cout << endl;
 
     /*OWN TESTS */
+    //Seg Fault check
+    cb.submitMove("A2", "A0");
+    cout << endl;
+
+
     //Check Bishops Move Invalid
     cb.submitMove("F1", "F3");
     cout << endl;
