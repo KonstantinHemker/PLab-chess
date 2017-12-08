@@ -24,10 +24,10 @@ void Figure::updatePosition(FigurePtr square[][8], string newPos)  {
     }
   }
 */
-  if (square[1][0] == NULL)
+  if (square[0][0] == NULL)
   cout << "NULL" << endl;
-  cout << square[1][0]-> getType() << endl;
-  square[1][0] -> getValidMoves(square);
+  //cout << square[0][0]-> getType() << endl;
+  square[D][0] -> getValidMoves(square);
 
 }
 
@@ -128,7 +128,8 @@ bool Figure::validDestination(FigurePtr square[][8], string currPos, string newP
     return true;
 
   //Validity Condition(2): Destination is not the King (cannot beat King)
-  if (square[gF(newPos)][gR(newPos)]->getType() == "King")
+  if ((square[gF(newPos)][gR(newPos)]->getType() == "King") &&
+  square[gF(newPos)][gR(newPos)]->getColour() != square[gF(currPos)][gR(currPos)]->getColour())
     return true;
 
   //Validity Condition(3): Opponent chess piece
