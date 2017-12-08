@@ -29,27 +29,15 @@ bool Bishop::validRoute(FigurePtr square[][8], string currPos, string newPos) {
   int vertical = gR(newPos)-rank;
   bool result = false;
 
-
-  if ((horizontal > 0) && (vertical>0)) {
-  for (int i = 1; i < abs(horizontal); i++) {
-    if (square[file+i][rank+i] == NULL)
-      result = true;
-    else
-      result = false;
-    }
-  }
-  if (result == true)
-    return result;
-
   /*Possibility 1: Bishop moves in a "double positive" diagonal */
     if ((horizontal > 0) && (vertical>0)) {
     for (int i = 1; i < abs(horizontal); i++) {
       if (square[file+i][rank+i] == NULL)
         result = true;
       else
-        result = false;
-      }
+        return false;
     }
+  }
     if (result == true)
       return result;
 
@@ -59,9 +47,9 @@ bool Bishop::validRoute(FigurePtr square[][8], string currPos, string newPos) {
       if (square[file+i][rank-i] == NULL)
         result = true;
       else
-        result = false;
-      }
+        return false;
     }
+  }
     if (result == true)
       return result;
 
@@ -71,24 +59,21 @@ bool Bishop::validRoute(FigurePtr square[][8], string currPos, string newPos) {
       if (square[file-i][rank+i] == NULL)
         result = true;
       else
-        result = false;
+        return false;
       }
     }
     if (result == true)
       return result;
 
-    /*Possibliity 3: Bishop moves in a "double negative" diagonal */
+    /*Possibliity 4: Bishop moves in a "double negative" diagonal */
       if ((horizontal < 0) && (vertical<0)) {
       for (int i = 1; i < abs(horizontal); i++) {
         if (square[file-i][rank+i] == NULL)
           result = true;
         else
-          result = false;
+          return false;
         }
       }
-      if (result == true)
-        return result;
-
 
     return result;
 

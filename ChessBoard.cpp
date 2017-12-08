@@ -69,7 +69,6 @@ ChessBoard::~ChessBoard() {
       //Check move
       checkMove(currPos, newPos);
       if (error_code != 0) {
-	       error_code = 0;
          return;
       }
       //Make move
@@ -84,7 +83,7 @@ ChessBoard::~ChessBoard() {
 
 
     void ChessBoard::checkMove(string currPos, string newPos) {
-
+      error_code = 0; //reset error_code from previous checks
       //Check WRONG_MOVE
       if (square[gF(currPos)][gR(currPos)] == NULL) {
         error_code = NO_PIECE;

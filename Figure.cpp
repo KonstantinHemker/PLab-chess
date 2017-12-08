@@ -7,7 +7,6 @@ Figure::Figure(string input_type, bool input_colour, int input_file, int input_r
   colour = input_colour;
   rank = input_rank;
   file = input_file;
-  //cout << "Figure " << this << " has rank " << rank << " and file " << file << endl;
 }
 
 void Figure::updatePosition(FigurePtr square[][8], string newPos)  {
@@ -16,16 +15,25 @@ void Figure::updatePosition(FigurePtr square[][8], string newPos)  {
   rank = gR(newPos);
 
   //Update the legal moves for each figure on the field
+
+  /*
   for (int i = 0; i < 8; i++) {
     for (int c = 0; c < 8; c++) {
     if (square[i][c] != NULL)
       square[i][c]->getValidMoves(square);
     }
   }
+*/
+  if (square[1][0] == NULL)
+  cout << "NULL" << endl;
+  cout << square[1][0]-> getType() << endl;
+  square[1][0] -> getValidMoves(square);
+
 }
 
 
 bool Figure::validStep(FigurePtr square[][8], string currPos, string newPos, int &error_code) {
+/*DO NOT CHANGE ORDER OF CHECKS*/
 
   //Check the whether the move is legal for respective figure
   if (square[gF(currPos)][gR(currPos)]->validMove(square, currPos, newPos) == false) {
@@ -59,18 +67,27 @@ void Figure::getValidMoves(FigurePtr square[][8]) {
   string currPos = getPosition();
   int count = 0;
 
+  bool condition1, condition2, condition3;
+
   for (int i = 0; i < 8; i++) {
     for (int c = 0; c < 8; c++) {
       newPos = createNewPos(i, c);
-      if ((square[rank][file] -> validRoute(square, currPos, newPos) == true) &&
-	       (square[rank][file]->validDestination(square, currPos, newPos) == true) &&
-	       (square[rank][file]->validMove(square, currPos, newPos) == true)) {
+      condition1 = validRoute(square, currPos, newPos);
+      condition2 = validDestination(square, currPos, newPos);
+      condition3 = validMove(square, currPos, newPos);
+
+      if ((condition1 == true) && (condition2 == true) && (condition3 == true)) {
         legalMove[count] = newPos;
         count++;
       }
     }
+
   }
 
+  cout << getType() << getColour() << legalMove[0] << endl;
+  cout << getType() << getColour() << legalMove[1] << endl;
+  cout << getType() << getColour() << legalMove[2] << endl;
+  cout << getType() << getColour() << legalMove[3] << endl;
   //Loop through all fields on the board and check whether they are a valid move
 
   //do something
@@ -112,7 +129,7 @@ bool Figure::validDestination(FigurePtr square[][8], string currPos, string newP
 
   //Validity Condition(2): Destination is not the King (cannot beat King)
   if (square[gF(newPos)][gR(newPos)]->getType() == "King")
-    return false;
+    return true;
 
   //Validity Condition(3): Opponent chess piece
   if (square[gF(newPos)][gR(newPos)]-> getColour() != square[gF(currPos)][gR(currPos)]->getColour())

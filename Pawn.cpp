@@ -17,9 +17,10 @@ bool Pawn::validMove(FigurePtr square[][8], string currPos, string newPos)  {
 
   //Condition(1): Colour white
   if (colour == 0)  {
-    if ((rank = 1) && (vertical == 2))
+    if ((rank = 1) && ((vertical == 1) || (vertical == 2)) && (horizontal == 0))
       return true;
-    if ((rank > 1) && (vertical == 2))
+    if ((rank > 1) && (vertical == 1) && (horizontal == 0))
+
 
     //Condition(2): Immediate diagonal fields
     if (file < 7) { //avoids the rightmost edge case
@@ -34,13 +35,15 @@ bool Pawn::validMove(FigurePtr square[][8], string currPos, string newPos)  {
         return true;
     }
   }
+}
 
   //Condition(1): Colour Black
   if (colour == 1)  {
-    if ((rank = 6) && (vertical == -2))
+    if ((rank = 6) && ((vertical == -2) || (vertical == -1)) && (horizontal == 0))
       return true;
-    if ((rank < 6) && (vertical == -1))
+    if ((rank < 6) && (vertical == -1) && (horizontal == 0))
       return true;
+
 
   if (file < 7) { //avoids the rightmost edge case
   if (square[file-1][rank-1] != NULL) {
@@ -55,7 +58,6 @@ bool Pawn::validMove(FigurePtr square[][8], string currPos, string newPos)  {
       return true;
     }
 
-  }
   }
   return false;
 

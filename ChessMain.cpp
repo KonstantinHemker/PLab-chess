@@ -20,6 +20,8 @@ int main() {
     cb.submitMove("A2", "A0");
     cout << endl;
 
+    cb.submitMove("B1", "C3");
+    cout << endl;
 
     //Check Bishops Move Invalid
     cb.submitMove("F1", "F3");
