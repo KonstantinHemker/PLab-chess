@@ -25,6 +25,8 @@ void Figure::updatePosition(FigurePtr square[][8], string newPos)  {
   }
 
 
+
+
   
 
   /*  
@@ -34,6 +36,19 @@ void Figure::updatePosition(FigurePtr square[][8], string newPos)  {
   square[E][0] -> getValidMoves(square);
   */
 }
+
+
+bool Figure::checkCheck(FigurePtr square[][8], int i, int c, bool turn, string winston, string charles) {
+  if ((turn == 0) && (square[i][c]->getColour() != turn))  {
+    for (int n = 0; n <= legalMove.size(); n++) {
+      if (legalMove[n] == winston)
+	return true;
+    }
+  }
+return false;
+}
+
+
 
 string Figure::validMove(int n) {
   return legalMove[n];

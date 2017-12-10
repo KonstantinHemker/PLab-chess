@@ -17,7 +17,8 @@ public:
   void loadValidMoves(FigurePtr square[][8]);
   string createNewPos(int i, int c);
   string validMove(int n);
-  //bool checkCheck (FigurePtr square[][8]);
+  bool checkCheck(FigurePtr square[][8], int i, int c, bool turn, string winston, string charles);
+
   //Function that checks whether the destination is either a
   bool validDestination(FigurePtr square[][8], string newPos, string currPos);
   void DestinationError (FigurePtr square[][8], string newPos, string currPos);

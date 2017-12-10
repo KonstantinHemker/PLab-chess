@@ -98,19 +98,14 @@ ChessBoard::~ChessBoard() {
 bool ChessBoard::checkCheck() {
   for(int i = 0; i < 8; i++) {
     for (int c = 0; c < 8; c++) {
-
       if (square[i][c] != NULL) {
-	if ((turn == 0) && (square[i][c]->getColour()!=turn)) {
-	  for (int n = 0; n <= square[i][c] ->validMove.size(); n++) {
-	    if (square[i][c]->validMove(n)==winston)
-	      return true;
-	    //Function checks the valid moves only of the opponent figures
+	square[i][c]->checkCheck(square, i, c, turn, winston, charles);
+      
+      	//Function checks the valid moves only of the opponent figures
 	    
 	  }
 	}
       }
-    }
-  }
   return false;
 }
       
