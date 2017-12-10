@@ -27,12 +27,14 @@ bool Queen::validMove(FigurePtr square[][8], string currPos, string newPos) {
 
 
 bool Queen::validRoute(FigurePtr square[][8], string currPos, string newPos) {
+
   int horizontal = gF(newPos)-file;
   int vertical = gR(newPos)-rank;
   bool result;
 
-  if (horizontal > 0) {
-    for (int i = 1; i < horizontal; i++) {
+  //Rook moves
+  if ((horizontal > 0) && (vertical == 0)) {
+    for (int i = 1; i <= horizontal; i++) {
       if (square[file][rank+i] == NULL)
         result = true;
       else
@@ -40,8 +42,8 @@ bool Queen::validRoute(FigurePtr square[][8], string currPos, string newPos) {
     }
   }
 
-  if (horizontal < 0) {
-    for (int i = 1; i < horizontal; i++) {
+  if ((horizontal < 0) && (vertical == 0)) {
+    for (int i = 1; i <= horizontal; i++) {
       if (square[file][rank-i] == NULL)
         result = true;
       else
@@ -49,7 +51,7 @@ bool Queen::validRoute(FigurePtr square[][8], string currPos, string newPos) {
     }
   }
 
-  if (vertical > 0) {
+  if ((vertical > 0) && (horizontal == 0)) {
     for (int i = 1; i < horizontal; i++) {
       if (square[file][rank+i] == NULL)
         result = true;
@@ -59,7 +61,7 @@ bool Queen::validRoute(FigurePtr square[][8], string currPos, string newPos) {
   }
 
 
-  if (vertical < 0) {
+  if ((vertical < 0) && (horizontal == 0)) {
     for (int i = 1; i < horizontal; i++) {
       if (square[file][rank-i] == NULL)
         result = true;
@@ -68,11 +70,6 @@ bool Queen::validRoute(FigurePtr square[][8], string currPos, string newPos) {
     }
   }
 
-
-  if (abs(horizontal) == abs(vertical))
-    return true;
-  else
-    return false;
 
 
   /*Possibility 1: Bishop moves in a "double positive" diagonal */

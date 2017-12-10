@@ -2,7 +2,7 @@
 #include "Pawn.h"
 
 Pawn::Pawn(string type, bool c, int a, int b) : Figure (type, c, a, b) {
-  //tbccd
+  //tbc
 }
 
 bool Pawn::validMove(FigurePtr square[][8], string currPos, string newPos)  {
@@ -62,3 +62,30 @@ bool Pawn::validMove(FigurePtr square[][8], string currPos, string newPos)  {
   return false;
 
 }
+
+
+/*
+bool Pawn::validRoute(FigurePtr square[][8], string currPos, string newPos) {
+  int horizontal = gF(newPos) - file;
+  int vertical = gR(newPos) - rank;
+
+  //for white figures
+  if (colour == 0) {
+
+    if ((rank == 1) && (vertical == 2)) {
+      if (square[file][rank+1] != NULL)
+	return false;
+    }
+  }
+
+  if (colour == 1)  {
+
+    if ((rank == 6) && (vertical == -2)) {
+      if (square[file][rank-1] != NULL)
+	return false;
+    }
+
+    return true;
+  }
+}
+*/	

@@ -16,19 +16,21 @@ void Figure::updatePosition(FigurePtr square[][8], string newPos)  {
 
   //Update the legal moves for each figure on the field
 
-  /*
+  
   for (int i = 0; i < 8; i++) {
     for (int c = 0; c < 8; c++) {
     if (square[i][c] != NULL)
       square[i][c]->getValidMoves(square);
     }
   }
-*/
+  
+
+  /*  
   if (square[0][0] == NULL)
   cout << "NULL" << endl;
   //cout << square[0][0]-> getType() << endl;
-  square[D][0] -> getValidMoves(square);
-
+  square[E][0] -> getValidMoves(square);
+  */
 }
 
 
@@ -124,18 +126,23 @@ bool Figure::validRoute(FigurePtr square[][8], string currPos, string newPos) {
 bool Figure::validDestination(FigurePtr square[][8], string currPos, string newPos)  {
 
   //Validity Condition(1): Empty field
-  if (square[gF(newPos)][gR(newPos)] == NULL)
+  if (square[gF(newPos)][gR(newPos)] == NULL) {
+    //cout << "NULL" << endl;
     return true;
+  }
 
   //Validity Condition(2): Destination is not the King (cannot beat King)
   if ((square[gF(newPos)][gR(newPos)]->getType() == "King") &&
-  square[gF(newPos)][gR(newPos)]->getColour() != square[gF(currPos)][gR(currPos)]->getColour())
+      square[gF(newPos)][gR(newPos)]->getColour() != square[gF(currPos)][gR(currPos)]->getColour()) {
+    //cout << "Destination not King" << endl;
     return true;
-
+  }
+    
   //Validity Condition(3): Opponent chess piece
-  if (square[gF(newPos)][gR(newPos)]-> getColour() != square[gF(currPos)][gR(currPos)]->getColour())
+    if (square[gF(newPos)][gR(newPos)]-> getColour() != square[gF(currPos)][gR(currPos)]->getColour()) {
+      //cout << "Opponent chess piece" << endl;
     return true;
-
+    }
 
 
   return false;

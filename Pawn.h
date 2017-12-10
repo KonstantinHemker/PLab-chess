@@ -10,6 +10,7 @@ class Pawn : public Figure  {
  public:
   Pawn (string type, bool c, int a, int b);
   bool validMove (FigurePtr square[][8], string currPos, string newPos) override;
+  //bool validRoute (FigurePtr square[][8], string currPos, string newPos) override;
 };
 
 #endif
