@@ -47,6 +47,11 @@ ChessBoard::ChessBoard () {
       square[i][c] = NULL;
     }
 
+
+  //Set the positions of the Kings
+  winston = "E1";
+  charles = "E8";
+  
     cout << "A new chess game is started" << endl;
 }
 
@@ -66,21 +71,56 @@ ChessBoard::~ChessBoard() {
 
 
     void ChessBoard::submitMove(string currPos, string newPos) {
+      
       //Check move
       checkMove(currPos, newPos);
       if (error_code != 0) {
          return;
       }
+       if (square[gF(newPos)][gR(newPos)] != NULL)
+	byeFigure();
+      
+
+
       //Make move
     	square[gF(newPos)][gR(newPos)] = square[gF(currPos)][gR(currPos)];
 	    square[gF(currPos)][gR(currPos)] = NULL;
       square[gF(newPos)][gR(newPos)]->updatePosition(square, newPos);
 
+      checkCheck();
+      
       printMoveMessage(currPos, newPos);
 
       switchTurn();
     }
 
+
+bool ChessBoard::checkCheck() {
+  for(int i = 0; i < 8; i++) {
+    for (int c = 0; c < 8; c++) {
+
+      if (square[i][c] != NULL) {
+	if ((turn == 0) && (square[i][c]->getColour()!=turn)) {
+	  for (int n = 0; n <= square[i][c] ->validMove.size(); n++) {
+	    if (square[i][c]->validMove(n)==winston)
+	      return true;
+	    //Function checks the valid moves only of the opponent figures
+	    
+	  }
+	}
+      }
+    }
+  }
+  return false;
+}
+      
+
+
+void ChessBoard::byeFigure()  {
+
+ //overload exertion operator
+ 
+}
 
     void ChessBoard::checkMove(string currPos, string newPos) {
       error_code = 0; //reset error_code from previous checks
@@ -186,6 +226,9 @@ ChessBoard::~ChessBoard() {
           square[i][c] = NULL;
         }
 
+      winston = "E1";
+      charles = "E8";
+      
       cout << "A new chess game is started" << endl;
     }
 

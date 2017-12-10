@@ -35,7 +35,7 @@ void Figure::updatePosition(FigurePtr square[][8], string newPos)  {
   */
 }
 
-string Figure::validMove(int n) {
+vector<string> Figure::validMove(int n) {
   return legalMove[n];
 }
 

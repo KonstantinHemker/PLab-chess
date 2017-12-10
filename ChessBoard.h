@@ -9,6 +9,7 @@
 #include<sstream>
 #include<map>
 #include<cmath>
+#include<vector>
 
 //Error Codes
 #define WRONG_TURN -1;
@@ -39,11 +40,12 @@ int gR(string str); //abbrev. for getRank
 int gF(string str); //abbrev. for getFile
 
 class ChessBoard {
-friend class Figure;
+  //friend class Figure;
 protected:
   FigurePtr square[8][8]; //two-dimensional array of pointers to the chess board
   bool turn; //0 --> White's turn || 1 --> black's turn
   int error_code;
+  string winston, charles; //Winston is the position of the white king, Charles of the black King
 public:
   ChessBoard ();
   virtual ~ChessBoard();
@@ -58,6 +60,8 @@ public:
   void switchTurn();
   void printMoveMessage(string currPos, string nextPos);
   bool getTurn();
+  bool checkCheck();
+  void byeFigure();
   //friend ostream& operator << (ostream)
 };
 

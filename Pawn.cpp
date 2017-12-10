@@ -64,12 +64,11 @@ bool Pawn::validMove(FigurePtr square[][8], string currPos, string newPos)  {
 }
 
 
-/*
 bool Pawn::validRoute(FigurePtr square[][8], string currPos, string newPos) {
   int horizontal = gF(newPos) - file;
   int vertical = gR(newPos) - rank;
 
-  //for white figures
+  //for white pawns
   if (colour == 0) {
 
     if ((rank == 1) && (vertical == 2)) {
@@ -77,7 +76,7 @@ bool Pawn::validRoute(FigurePtr square[][8], string currPos, string newPos) {
 	return false;
     }
   }
-
+  //for black pawns
   if (colour == 1)  {
 
     if ((rank == 6) && (vertical == -2)) {
@@ -85,7 +84,7 @@ bool Pawn::validRoute(FigurePtr square[][8], string currPos, string newPos) {
 	return false;
     }
 
-    return true;
   }
+
+  return true;
 }
-*/	

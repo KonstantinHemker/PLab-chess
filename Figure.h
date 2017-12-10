@@ -10,12 +10,14 @@ protected:
   int rank; //horizontal position
   int file; //vertical position
   bool colour; //0 --> white || 1--> black
-  string legalMove[50];
+  vector<string> legalMove;
 public:
   Figure (string input_type, bool input_colour, int input_rank, int input_file);
   void updatePosition(FigurePtr square[][8], string newPos);
-  void getValidMoves(FigurePtr square[][8]);
+  void loadValidMoves(FigurePtr square[][8]);
   string createNewPos(int i, int c);
+  string validMove(int n);
+  //bool checkCheck (FigurePtr square[][8]);
   //Function that checks whether the destination is either a
   bool validDestination(FigurePtr square[][8], string newPos, string currPos);
   void DestinationError (FigurePtr square[][8], string newPos, string currPos);
