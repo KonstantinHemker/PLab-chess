@@ -44,6 +44,7 @@ protected:
   FigurePtr square[8][8]; //two-dimensional array of pointers to the chess board
   bool turn; //0 --> White's turn || 1 --> black's turn
   int error_code;
+  string winston, charles; //Winston is the position of the white king, charles that of the black king
 public:
   ChessBoard ();
   virtual ~ChessBoard();
@@ -51,8 +52,11 @@ public:
   void submitMove(string currPos, string nextPos);
   void resetBoard();
   //virtual bool valid_move ();
+  void updateMoves();
   void setFigures ();
   void printBoard();
+  string createNewPos(int i, int c);
+  string getPosition(int i, int c);
   void checkMove(string currPos, string nextPos);
   bool checkInput (string input);
   void switchTurn();

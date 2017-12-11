@@ -13,11 +13,11 @@ protected:
   string legalMove[50];
 public:
   Figure (string input_type, bool input_colour, int input_rank, int input_file);
-  void updatePosition(FigurePtr square[][8], string newPos);
-  void getValidMoves(FigurePtr square[][8]);
+  void updatePosition(FigurePtr square[][8], string newPos, bool turn);
+  void getValidMoves(FigurePtr square[][8], bool turn);
   string createNewPos(int i, int c);
   //Function that checks whether the destination is either a
-  bool validDestination(FigurePtr square[][8], string newPos, string currPos);
+  bool validDestination(FigurePtr square[][8], string newPos, string currPos, bool turn);
   void DestinationError (FigurePtr square[][8], string newPos, string currPos);
 
   //Functiont that checks for three conditions. 1) Is the destination valid?
@@ -26,8 +26,8 @@ public:
   //Note that for the knight, the pawn and the king, the second check is not necessary,
   //because they don't pass any other fields before their destination (e.g. only can)
   //move one step
-  bool validStep(FigurePtr square[][8], string newPos, string currPos, int &error_code);
-
+  bool validStep(FigurePtr square[][8], string newPos, string currPos, int &error_code, bool turn);
+  void writeMove(int count, string newPos);
   virtual bool validRoute(FigurePtr square[][8], string currPos, string newPos);
   virtual bool validMove(FigurePtr square[][8], string currPos, string newPos) = 0;
   //virtual bool validRoute(FigurePtr square[][8], string currPos, string newPos);
@@ -35,6 +35,8 @@ public:
   string getPosition();
   bool getColour();
   void printColour();
+  int getFile();
+  int getRank();
 };
 
 

@@ -47,6 +47,9 @@ ChessBoard::ChessBoard () {
       square[i][c] = NULL;
     }
 
+    winston = "E1";
+    charles = "E8";
+
     cout << "A new chess game is started" << endl;
 }
 
@@ -66,20 +69,80 @@ ChessBoard::~ChessBoard() {
 
 
     void ChessBoard::submitMove(string currPos, string newPos) {
+
+      int fOld = gF(currPos);
+      int rOld = gR(currPos);
+      int fNew = gF(newPos);
+      int rNew = gR(newPos);
+
       //Check move
       checkMove(currPos, newPos);
       if (error_code != 0) {
          return;
       }
       //Make move
-    	square[gF(newPos)][gR(newPos)] = square[gF(currPos)][gR(currPos)];
-	    square[gF(currPos)][gR(currPos)] = NULL;
-      square[gF(newPos)][gR(newPos)]->updatePosition(square, newPos);
+      FigurePtr temp = square[fOld][rOld];
+      //delete square[fNew][rNew];
+      square[fNew][rNew] = temp;
+      square[fOld][rOld] = NULL;
+      square[fNew][rNew]->updatePosition(square, newPos, turn);
+      updateMoves();
+
 
       printMoveMessage(currPos, newPos);
 
       switchTurn();
     }
+
+
+    void ChessBoard::updateMoves() {
+      for (int i = 0; i < 8; i++) {
+        for (int c = 0; c < 8; c++) {
+        if (square[i][c] != NULL)  {
+          string newPos;
+          string currPos = getPosition(i, c);
+          int count = 0;
+
+          bool condition1, condition2, condition3;
+
+              newPos = createNewPos(i, c);
+              condition1 = square[i][c]-> validRoute(square, currPos, newPos);
+              condition2 = square[i][c]-> validDestination(square, currPos, newPos, turn);
+              condition3 = square[i][c]->validMove(square, currPos, newPos);
+
+              if ((condition1 == true) && (condition2 == true) && (condition3 == true)) {
+                square[i][c]->writeMove(count, newPos); // = newPos;
+                count++;
+              }
+            }
+          }
+        }
+      }
+
+
+      string ChessBoard::createNewPos(int i, int c)  {
+        string file; //Note that this is deliberately temporarily overloading the variable name
+        string rank;
+        string output;
+
+        file = i + 65; //corresponds to ASCII table letter
+        rank = c + 49; //corresponds to ASCII table digits
+        output = file + rank;
+
+        return output;
+      }
+
+      string ChessBoard::getPosition(int i, int c) {
+        string letter;
+        string number;
+
+        letter = square[i][c]->getFile() + 65;
+        number = square[i][c]->getRank() + 49;
+        string output = letter + number;
+
+        return output;
+      }
+
 
 
     void ChessBoard::checkMove(string currPos, string newPos) {
@@ -113,7 +176,7 @@ ChessBoard::~ChessBoard() {
 
     }
 
-    square[gF(currPos)][gR(currPos)]-> validStep(square, currPos, newPos, error_code);
+      square[gF(currPos)][gR(currPos)]-> validStep(square, currPos, newPos, error_code, turn);
 
   }
 

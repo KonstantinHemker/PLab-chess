@@ -74,7 +74,7 @@ bool Pawn::validRoute(FigurePtr square[][8], string currPos, string newPos) {
 
     if ((rank == 1) && (vertical == 2)) {
       if (square[file][rank+1] != NULL)
-	return false;
+	     return false;
     }
   }
 
@@ -82,10 +82,10 @@ bool Pawn::validRoute(FigurePtr square[][8], string currPos, string newPos) {
 
     if ((rank == 6) && (vertical == -2)) {
       if (square[file][rank-1] != NULL)
-	return false;
+	     return false;
     }
 
     return true;
   }
 }
-*/	
+*/
