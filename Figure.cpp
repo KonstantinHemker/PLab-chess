@@ -36,7 +36,7 @@ void Figure::updatePosition(FigurePtr square[][8], string newPos, bool turn)  {
 }
 
 
-bool Figure::validStep(FigurePtr square[][8], string currPos, string newPos, int &error_code, bool turn) {
+bool Figure::validStep(FigurePtr square[][8], string currPos, string newPos, int &error_code, bool turn, bool &steal) {
 /*DO NOT CHANGE ORDER OF CHECKS*/
 
   //Check the whether the move is legal for respective figure
@@ -48,7 +48,7 @@ bool Figure::validStep(FigurePtr square[][8], string currPos, string newPos, int
   }
 
   //Destination
-  if (square[gF(currPos)][gR(currPos)]->validDestination(square, currPos, newPos, turn) == false)  {
+  if (square[gF(currPos)][gR(currPos)]->validDestination(square, currPos, newPos, turn, steal) == false)  {
     error_code = INVALID_DESTINATION;
     cerr << "Invalid Destination for ";
     square[gF(currPos)][gR(currPos)]->printColour();
@@ -83,6 +83,7 @@ void Figure::getValidMoves(FigurePtr square[][8], bool turn) {
       if ((condition1 == true) && (condition2 == true) && (condition3 == true)) {
         legalMove[count] = newPos;
         count++;
+  //Validity Condition(2): Destina
       }
     }
   }
@@ -120,6 +121,10 @@ string Figure::getPosition() {
   return output;
 }
 
+string Figure::getValidMove(int n) {
+  return legalMove[n];
+}
+
 int Figure::getFile() {
   return file;
 }
@@ -131,6 +136,9 @@ int Figure::getRank() {
 
   void Figure::writeMove(int count, string newPos) {
     legalMove[count] = newPos;
+    cout << getType() << legalMove[count];
+    printColour();
+    cout << endl;
   }
 
 bool Figure::validRoute(FigurePtr square[][8], string currPos, string newPos) {
@@ -138,26 +146,50 @@ bool Figure::validRoute(FigurePtr square[][8], string currPos, string newPos) {
   return true; //will be adjusted for the rook, the queen and the bishop
 }
 
-bool Figure::validDestination(FigurePtr square[][8], string currPos, string newPos, bool turn)  {
+
+//NOTE THE DUPLICATE - REMOVE REDUNDANCY!!
+bool Figure::validDestination(FigurePtr square[][8], string currPos, string newPos, bool turn, bool &steal)  {
   int fNew = gF(newPos);
   int rNew = gR(newPos);
 
   //Validity Condition(1): Empty field
   if (square[fNew][rNew] == NULL) {
-    //cout << "NULL" << endl;
     return true;
   }
 
   //Validity Condition(2): Destination is not the King (cannot beat King)
   if ((square[fNew][rNew]->getType() == "King") &&
       (square[fNew][rNew]->getColour() != square[gF(currPos)][gR(currPos)]->getColour())) {
-    //cout << "Destination not King" << endl;
     return true;
   }
 
   //Validity Condition(3): Opponent chess piece
     if (square[fNew][rNew]->getColour() != turn) {
-      //cout << "Opponent chess piece" << endl;
+    steal = true;
+    return true;
+    }
+
+  return false;
+}
+
+/* DO NOT DELETE THIS FUNCTION! SEG FAULT OTHERWISE*/
+bool Figure::validDestPositions(FigurePtr square[][8], string currPos, string newPos, bool turn, bool &steal)  {
+  //int fNew = gF(newPos);
+  //int rNew = gR(newPos);
+
+  //Validity Condition(1): Empty field
+  //if (square[fNew][rNew] == NULL) {
+  //  return true;
+  //}
+
+  //Validity Condition(2): Destination is not the King (cannot beat King)
+  if ((getType() == "King") && (getColour() != turn)) {
+    return true;
+  }
+
+  //Validity Condition(3): Opponent chess piece
+    if (getColour() != turn) {
+    steal = true;
     return true;
     }
 

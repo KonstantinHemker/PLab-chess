@@ -32,91 +32,99 @@ bool Queen::validRoute(FigurePtr square[][8], string currPos, string newPos) {
   int vertical = gR(newPos)-rank;
   bool result;
 
-  //Rook moves
-  if ((horizontal > 0) && (vertical == 0)) {
-    for (int i = 1; i <= horizontal; i++) {
-      if (square[file][rank+i] == NULL)
-        result = true;
-      else
-        return false;
-    }
+//We only want to check the route for all cases that the queen moves by more than 1 field
+
+if ((abs(horizontal == 1) || abs(vertical) == 1))
+  return true;
+else {
+if (horizontal > 1) {
+  for (int i = 1; i < horizontal; i++) {
+    if (square[file][rank+i] == NULL)
+      result = true;
+    else
+      result = false;
   }
+}
 
-  if ((horizontal < 0) && (vertical == 0)) {
-    for (int i = 1; i <= horizontal; i++) {
-      if (square[file][rank-i] == NULL)
-        result = true;
-      else
-        return false;
-    }
+if (horizontal < -1) {
+  for (int i = 1; i < horizontal; i++) {
+    if (square[file][rank-i] == NULL)
+      result = true;
+    else
+      result = false;
   }
+}
 
-  if ((vertical > 0) && (horizontal == 0)) {
-    for (int i = 1; i < horizontal; i++) {
-      if (square[file][rank+i] == NULL)
-        result = true;
-      else
-        return false;
-    }
+if (vertical > 1) {
+  for (int i = 1; i < horizontal; i++) {
+    if (square[file][rank+i] == NULL)
+      result = true;
+    else
+      result = false;
   }
+}
 
 
-  if ((vertical < 0) && (horizontal == 0)) {
-    for (int i = 1; i < horizontal; i++) {
-      if (square[file][rank-i] == NULL)
-        result = true;
-      else
+if (vertical < -1) {
+  for (int i = 1; i < horizontal; i++) {
+    if (square[file][rank-i] == NULL)
+      result = true;
+    else
+      result = false;
+  }
+}
+}
+
+
+if (abs(horizontal == 1))
+  return true;
+else {
+/*Possibility 1: Queen moves in a "double positive" diagonal */
+if ((horizontal > 1) && (vertical > 1)) { //>1 because if we only move by one, this will be checked by the
+  //destination check
+  for (int i = 1; i < abs(horizontal); i++) {
+    if (square[file+i][rank+i] == NULL)
+      result = true;
+    else
+      return false;
+  }
+}
+  if (result == true)
+    return result;
+
+/*Possibility 2: Queen moves in a "positive/negative" diagonal */
+  if ((horizontal > 1) && (vertical < -1)) {
+  for (int i = 1; i < abs(horizontal); i++) {
+    if (square[file+i][rank-i] == NULL)
+      result = true;
+    else
+      return false;
+  }
+}
+  if (result == true)
+    return result;
+
+/*Possibliity 3: Queen moves in a "negative/positive" diagonal */
+  if ((horizontal < -1) && (vertical > 1)) {
+  for (int i = 1; i < abs(horizontal); i++) {
+    if (square[file-i][rank+i] == NULL)
+      result = true;
+    else
       return false;
     }
   }
-
-
-
-  /*Possibility 1: Bishop moves in a "double positive" diagonal */
-    if ((horizontal > 0) && (vertical>0)) {
-    for (int i = 1; i < abs(horizontal); i++) {
-      if (square[file+i][rank+i] == NULL)
-        result = true;
-      else
-        return false;
-    }
-  }
-    if (result == true)
-      return result;
-
-  /*Possibility 2: Bishop moves in a "positive/negative" diagonal */
-    if ((horizontal > 0) && (vertical<0)) {
-    for (int i = 1; i < abs(horizontal); i++) {
-      if (square[file+i][rank-i] == NULL)
-        result = true;
-      else
-        return false;
-    }
-  }
-    if (result == true)
-      return result;
-
-  /*Possibliity 3: Bishop moves in a "negative/positive" diagonal */
-    if ((horizontal < 0) && (vertical>0)) {
-    for (int i = 1; i < abs(horizontal); i++) {
-      if (square[file-i][rank+i] == NULL)
-        result = true;
-      else
-        return false;
-      }
-    }
-    if (result == true)
-      return result;
-
-    /*Possibliity 4: Bishop moves in a "double negative" diagonal */
-      if ((horizontal < 0) && (vertical<0)) {
-      for (int i = 1; i < abs(horizontal); i++) {
-        if (square[file-i][rank+i] == NULL)
-          result = true;
-        else
-          return false;
-        }
-      }
-
+  if (result == true)
     return result;
+
+  /*Possibliity 4: Queen moves in a "double negative" diagonal */
+    if ((horizontal < -1) && (vertical < -1)) {
+    for (int i = 1; i < abs(horizontal); i++) {
+      if (square[file-i][rank-i] == NULL)
+        result = true;
+      else
+        return false;
+      }
+    }
+}
+  return result;
 }

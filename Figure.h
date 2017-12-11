@@ -17,7 +17,8 @@ public:
   void getValidMoves(FigurePtr square[][8], bool turn);
   string createNewPos(int i, int c);
   //Function that checks whether the destination is either a
-  bool validDestination(FigurePtr square[][8], string newPos, string currPos, bool turn);
+  bool validDestination(FigurePtr square[][8], string newPos, string currPos, bool turn, bool &steal);
+  bool validDestPositions(FigurePtr square[][8], string currPos, string newPos, bool turn, bool &steal);
   void DestinationError (FigurePtr square[][8], string newPos, string currPos);
 
   //Functiont that checks for three conditions. 1) Is the destination valid?
@@ -26,13 +27,14 @@ public:
   //Note that for the knight, the pawn and the king, the second check is not necessary,
   //because they don't pass any other fields before their destination (e.g. only can)
   //move one step
-  bool validStep(FigurePtr square[][8], string newPos, string currPos, int &error_code, bool turn);
+  bool validStep(FigurePtr square[][8], string newPos, string currPos, int &error_code, bool turn, bool &steal);
   void writeMove(int count, string newPos);
   virtual bool validRoute(FigurePtr square[][8], string currPos, string newPos);
   virtual bool validMove(FigurePtr square[][8], string currPos, string newPos) = 0;
   //virtual bool validRoute(FigurePtr square[][8], string currPos, string newPos);
   string getType();
   string getPosition();
+  string getValidMove(int n);
   bool getColour();
   void printColour();
   int getFile();

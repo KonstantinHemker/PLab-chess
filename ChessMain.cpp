@@ -92,6 +92,8 @@ int main() {
     cb.submitMove("D2", "D4");
     cout << endl;
 
+    cb.printBoard();
+
     cb.submitMove("F8", "B4");
     cout << endl;
 

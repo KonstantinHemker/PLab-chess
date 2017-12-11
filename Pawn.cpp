@@ -20,7 +20,7 @@ bool Pawn::validMove(FigurePtr square[][8], string currPos, string newPos)  {
     if ((rank = 1) && ((vertical == 1) || (vertical == 2)) && (horizontal == 0))
       return true;
     if ((rank > 1) && (vertical == 1) && (horizontal == 0))
-
+      return true;
 
     //Condition(2): Immediate diagonal fields
     if (file < 7) { //avoids the rightmost edge case

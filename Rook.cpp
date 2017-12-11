@@ -27,7 +27,30 @@ bool Rook::validRoute(FigurePtr square[][8], string currPos, string newPos) {
   int vertical = gR(newPos)-rank;
   bool result;
 
-  if (horizontal > 0) {
+  //We want to check the route for all cases that the Rook moves more than 1 field
+  //The other case is already covered in the "destination" check
+  if ((abs(horizontal == 1) || abs(vertical) == 1))
+    return true;
+  else {
+  if (horizontal > 1) {
+    for (int i = 1; i < horizontal; i++) {
+      if (square[file+1][rank] == NULL)
+        result = true;
+      else
+        result = false;
+    }
+  }
+
+  if (horizontal < -1) {
+    for (int i = 1; i < horizontal; i++) {
+      if (square[file-1][rank] == NULL)
+        result = true;
+      else
+        result = false;
+    }
+  }
+
+  if (vertical > 1) {
     for (int i = 1; i < horizontal; i++) {
       if (square[file][rank+i] == NULL)
         result = true;
@@ -36,7 +59,8 @@ bool Rook::validRoute(FigurePtr square[][8], string currPos, string newPos) {
     }
   }
 
-  if (horizontal < 0) {
+
+  if (vertical < -1) {
     for (int i = 1; i < horizontal; i++) {
       if (square[file][rank-i] == NULL)
         result = true;
@@ -44,26 +68,7 @@ bool Rook::validRoute(FigurePtr square[][8], string currPos, string newPos) {
         result = false;
     }
   }
-
-  if (vertical > 0) {
-    for (int i = 1; i < horizontal; i++) {
-      if (square[file][rank+i] == NULL)
-        result = true;
-      else
-        result = false;
-    }
-  }
-
-
-  if (vertical < 0) {
-    for (int i = 1; i < horizontal; i++) {
-      if (square[file][rank-i] == NULL)
-        result = true;
-      else
-        result = false;
-    }
-  }
-
+}
   return result;
 
 }

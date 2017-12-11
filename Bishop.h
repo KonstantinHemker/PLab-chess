@@ -7,7 +7,7 @@
 
 class Bishop : public Figure {
  private:
-
+   //char symbol = "♔";
  public:
    Bishop(string type, bool c, int a, int b);
    bool validMove (FigurePtr square[][8], string currPos, string newPos) override;

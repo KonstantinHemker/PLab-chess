@@ -52,15 +52,15 @@ public:
   void submitMove(string currPos, string nextPos);
   void resetBoard();
   //virtual bool valid_move ();
-  void updateMoves();
+  void updateMoves(bool &steal);
   void setFigures ();
   void printBoard();
   string createNewPos(int i, int c);
   string getPosition(int i, int c);
-  void checkMove(string currPos, string nextPos);
+  void checkMove(string currPos, string nextPos, bool &steal);
   bool checkInput (string input);
   void switchTurn();
-  void printMoveMessage(string currPos, string nextPos);
+  void printMoveMessage(string currPos, string nextPos, bool &steal);
   bool getTurn();
   //friend ostream& operator << (ostream)
 };

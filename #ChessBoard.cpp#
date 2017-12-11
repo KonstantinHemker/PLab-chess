@@ -100,77 +100,36 @@ ChessBoard::~ChessBoard() {
     void ChessBoard::updateMoves(bool &steal) {
       for (int i = 0; i < 8; i++) {
         for (int c = 0; c < 8; c++) {
-          if (square[i][c] != NULL)  {
-            string newPos;
-            string currPos = getPosition(i, c);
-            int count = 0;
+        if (square[i][c] != NULL)  {
+          string newPos;
+          string currPos = getPosition(i, c);
+          int count = 0;
 
-      for (int n = 0; n < 8; n++) {
-        for (int h = 0; h < 8; h++) {
+          bool condition1, condition2, condition3;
 
-            bool condition1, condition2, condition3;
-            newPos = createNewPos(n, h);
-            //if (square[n][h] == NULL) {
-            //  square[i][c]->writeMove(count, newPos);
-            //  count++;
-            //}
-            if ((square[n][h] == NULL) || (square[n][h]->getColour() != turn)) {
-              //condition checks for the destination
+              newPos = createNewPos(i, c);
               condition1 = square[i][c]-> validRoute(square, currPos, newPos);
-              //condition2 = square[n][h]-> validDestPositions(square, currPos, newPos, turn, steal);
-              condition3 = square[i][c]-> validMove(square, currPos, newPos);
+              condition2 = square[i][c]-> validDestination(square, currPos, newPos, turn, steal);
+              condition3 = square[i][c]->validMove(square, currPos, newPos);
 
-          if ((condition1 == true) && (condition2 == true) && (condition3 == true)) {
-            square[i][c]->writeMove(count, newPos); // = newPos;
-            count++;
-              }
-            }
-            }
-          }
-    }
-  }
-        }
-      }
-
-
-/*
-    void ChessBoard::updateMoves(bool &steal) {
-      for (int i = 0; i < 8; i++) {
-        for (int c = 0; c < 8; c++) {
-          if (square[i][c] != NULL)  {
-            string newPos;
-            string currPos = getPosition(i, c);
-            int count = 0;
-
-	    for (int n = 0; n < 8; n++) {
-	      for (int h = 0; h < 8; h++) {
-
-            bool condition1, condition2, condition3;
-            newPos = createNewPos(n, h);
-            condition1 = square[i][c]-> validRoute(square, currPos, newPos);
-            condition2 = square[i][c]-> validDestination(square, currPos, newPos, turn, steal);
-            condition3 = square[i][c]->validMove(square, currPos, newPos);
-
-          if ((condition1 == true) && (condition2 == true) && (condition3 == true)) {
-            square[i][c]->writeMove(count, newPos); // = newPos;
-            count++;
+              if ((condition1 == true) && (condition2 == true) && (condition3 == true)) {
+                square[i][c]->writeMove(count, newPos); // = newPos;
+                count++;
               }
             }
           }
-	  }
-	}
         }
       }
-*/
+
 
       string ChessBoard::createNewPos(int i, int c)  {
-        string File; //Note that this is deliberately temporarily overloading the variable name
-        string Rank;
+        string file; //Note that this is deliberately temporarily overloading the variable name
+        string rank;
         string output;
 
-        File = i + 65; //corresponds to ASCII table letter
-        Rank = c + 49; //corresponds to ASCII table digits
-        output = File + Rank;
+        file = i + 65; //corresponds to ASCII table letter
+        rank = c + 49; //corresponds to ASCII table digits
+        output = file + rank;
 
         return output;
       }
@@ -304,18 +263,7 @@ ChessBoard::~ChessBoard() {
     }
 
     void ChessBoard::printBoard() {
-      for (int i = 7; i >=0; i--) {
-        cout << endl;
-        cout << "+-+-+" << endl;
-
-        for (int c = 7; c >=0; c--) {
-          if (square[i][c] != 0)
-          cout << "on " <<  i << " " << c << square[i][c]->getType() << endl;
-          else
-          cout << "NULL" << endl;
-        }
-      }
-
+      return;
     }
 
     int gF (string str) {

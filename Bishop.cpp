@@ -14,9 +14,6 @@ bool Bishop::validMove(FigurePtr square[][8], string currPos, string newPos) {
   int horizontal = gF(newPos)-file;
   int vertical = gR(newPos)-rank;
 
-  //cout << "Horizontal movement " << horizontal << endl;
-  //cout << "Vertical movement " << vertical << endl;
-
 
   if (abs(horizontal) == abs(vertical))
     return true;
@@ -27,12 +24,17 @@ bool Bishop::validMove(FigurePtr square[][8], string currPos, string newPos) {
 bool Bishop::validRoute(FigurePtr square[][8], string currPos, string newPos) {
   int horizontal = gF(newPos)-file;
   int vertical = gR(newPos)-rank;
-  cout << "vertical: " << vertical << endl;
-  cout << "horizontal: " << horizontal << endl;
   bool result = false;
 
+  //We want to check the route for all cases that the Bishop moves more than 1 field
+
+  if (abs(horizontal == 1))
+    return true;
+  else {
+
   /*Possibility 1: Bishop moves in a "double positive" diagonal */
-    if ((horizontal > 0) && (vertical>0)) {
+  if ((horizontal > 1) && (vertical > 1)) { //>1 because if we only move by one, this will be checked by the
+    //destination check
     for (int i = 1; i < abs(horizontal); i++) {
       if (square[file+i][rank+i] == NULL)
         result = true;
@@ -44,7 +46,7 @@ bool Bishop::validRoute(FigurePtr square[][8], string currPos, string newPos) {
       return result;
 
   /*Possibility 2: Bishop moves in a "positive/negative" diagonal */
-    if ((horizontal > 0) && (vertical<0)) {
+    if ((horizontal > 1) && (vertical < -1)) {
     for (int i = 1; i < abs(horizontal); i++) {
       if (square[file+i][rank-i] == NULL)
         result = true;
@@ -56,7 +58,7 @@ bool Bishop::validRoute(FigurePtr square[][8], string currPos, string newPos) {
       return result;
 
   /*Possibliity 3: Bishop moves in a "negative/positive" diagonal */
-    if ((horizontal < 0) && (vertical>0)) {
+    if ((horizontal < -1) && (vertical > 1)) {
     for (int i = 1; i < abs(horizontal); i++) {
       if (square[file-i][rank+i] == NULL)
         result = true;
@@ -68,7 +70,7 @@ bool Bishop::validRoute(FigurePtr square[][8], string currPos, string newPos) {
       return result;
 
     /*Possibliity 4: Bishop moves in a "double negative" diagonal */
-      if ((horizontal < 0) && (vertical<0)) {
+      if ((horizontal < -1) && (vertical < -1)) {
       for (int i = 1; i < abs(horizontal); i++) {
         if (square[file-i][rank-i] == NULL)
           result = true;
@@ -76,7 +78,7 @@ bool Bishop::validRoute(FigurePtr square[][8], string currPos, string newPos) {
           return false;
         }
       }
-
+  }
     return result;
 
   }
