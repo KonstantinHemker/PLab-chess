@@ -51,7 +51,7 @@ ChessBoard::ChessBoard () {
   //Set the positions of the Kings
   winston = "E1";
   charles = "E8";
-  
+
     cout << "A new chess game is started" << endl;
 }
 
@@ -71,7 +71,7 @@ ChessBoard::~ChessBoard() {
 
 
     void ChessBoard::submitMove(string currPos, string newPos) {
-      
+
       //Check move
       checkMove(currPos, newPos);
       if (error_code != 0) {
@@ -79,17 +79,23 @@ ChessBoard::~ChessBoard() {
       }
        if (square[gF(newPos)][gR(newPos)] != NULL)
 	byeFigure();
-      
 
 
+      //cout << square[gF(newPos)][gR(newPos)]->getFile() << square[gF(newPos)][gR(newPos)]->getRank();
       //Make move
     	square[gF(newPos)][gR(newPos)] = square[gF(currPos)][gR(currPos)];
+      //cout << square[gF(newPos)][gR(newPos)]->getFile() << square[gF(newPos)][gR(newPos)]->getRank();
 	    square[gF(currPos)][gR(currPos)] = NULL;
-      square[gF(newPos)][gR(newPos)]->updatePosition(square, newPos);
-
-      checkCheck();
+	    square[gF(newPos)][gR(newPos)]->updatePosition(square, newPos, turn);
       
+
       printMoveMessage(currPos, newPos);
+
+
+      if (checkCheck() == true) {
+	square[gF(newPos)][gR(newPos)]->printColour();
+	cout << " is in check!" << endl;
+      }
 
       switchTurn();
     }
@@ -99,22 +105,22 @@ bool ChessBoard::checkCheck() {
   for(int i = 0; i < 8; i++) {
     for (int c = 0; c < 8; c++) {
       if (square[i][c] != NULL) {
-	square[i][c]->checkCheck(square, i, c, turn, winston, charles);
-      
+	if(square[i][c]->checkCheck(square, i, c, turn, winston, charles) == true)
+	  return true;
       	//Function checks the valid moves only of the opponent figures
-	    
+
 	  }
 	}
       }
   return false;
 }
-      
+
 
 
 void ChessBoard::byeFigure()  {
 
  //overload exertion operator
- 
+
 }
 
     void ChessBoard::checkMove(string currPos, string newPos) {
@@ -148,7 +154,7 @@ void ChessBoard::byeFigure()  {
 
     }
 
-    square[gF(currPos)][gR(currPos)]-> validStep(square, currPos, newPos, error_code);
+      square[gF(currPos)][gR(currPos)]-> validStep(square, currPos, newPos, error_code, turn);
 
   }
 
@@ -223,7 +229,7 @@ void ChessBoard::byeFigure()  {
 
       winston = "E1";
       charles = "E8";
-      
+
       cout << "A new chess game is started" << endl;
     }
 

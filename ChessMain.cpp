@@ -4,7 +4,6 @@ using namespace std;
 
 #include "ChessBoard.h"
 
-
 int main() {
 
     cout << "===========================" << endl;
@@ -17,6 +16,7 @@ int main() {
 
     /*OWN TESTS */
     //Seg Fault check
+    /*
     cb.submitMove("A2", "A0");
     cout << endl;
 
@@ -78,7 +78,7 @@ int main() {
     //Check White's pawn valid
     cb.submitMove("D2", "D3");
     cout << endl;
-
+    */
     /*  PRE WRITTEN TESTS */
     cb.submitMove("D7", "D6");
     cout << endl;
