@@ -37,6 +37,7 @@ enum Ranks {A,B,C,D,E,F,G,H};
 //General Helper functions
 int gR(string str); //abbrev. for getRank
 int gF(string str); //abbrev. for getFile
+string getPosition(FigurePtr square[][8], int i, int c);
 
 class ChessBoard {
 friend class Figure;
@@ -48,7 +49,7 @@ protected:
 public:
   ChessBoard ();
   virtual ~ChessBoard();
-  FigurePtr getPosition(string pos);
+  //FigurePtr getPosition(string pos);
   void submitMove(string currPos, string nextPos);
   void resetBoard();
   //virtual bool valid_move ();
@@ -56,7 +57,7 @@ public:
   void setFigures ();
   void printBoard();
   string createNewPos(int i, int c);
-  string getPosition(int i, int c);
+  //string getPosition(int i, int c);
   void checkMove(string currPos, string nextPos, bool &steal);
   bool checkInput (string input);
   void switchTurn();

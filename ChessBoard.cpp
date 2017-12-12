@@ -63,10 +63,6 @@ ChessBoard::~ChessBoard() {
   }
 }
 
-    FigurePtr ChessBoard::getPosition(string pos) {
-      //
-    }
-
 
     void ChessBoard::submitMove(string currPos, string newPos) {
 
@@ -88,7 +84,7 @@ ChessBoard::~ChessBoard() {
       square[fNew][rNew] = temp;
       square[fOld][rOld] = NULL;
 
-      square[fNew][rNew]->updatePosition(square, newPos, turn);
+      square[fNew][rNew]->updatePosition(square, currPos, newPos, turn, winston, charles);
       updateMoves(steal);
 
       if (checkCheck() == true) {
@@ -159,10 +155,10 @@ bool ChessBoard::checkMate(bool steal) {
 
 bool ChessBoard::simMove(string simPos, int i, int c, bool steal) {
   bool result;
-  string oldPos = getPosition(i, c);
+  string oldPos = getPosition(square, i, c);
   FigurePtr temp;
 
-  if ((i == gF(simPos)) && (c == gR(simPos))) //nothing will change if we simulate a move to the own position
+  if (((i == gF(simPos)) && (c == gR(simPos))) || (simPos == "")) //nothing will change if we simulate a move to the own position
     return true;
 
   //We don't have to check the validity of the moves when we simulate,
@@ -173,7 +169,7 @@ bool ChessBoard::simMove(string simPos, int i, int c, bool steal) {
   square[gF(simPos)][gR(simPos)] = square[i][c];
   square[i][c] = NULL;
 
-  square[gF(simPos)][gR(simPos)]-> updatePosition(square, simPos, turn);
+  square[gF(simPos)][gR(simPos)]-> updatePosition(square, oldPos, simPos, turn, winston, charles);
   updateMoves(steal);
 
   //The board is now in a state where the move we want to simulate has been made
@@ -189,7 +185,7 @@ bool ChessBoard::simMove(string simPos, int i, int c, bool steal) {
   square[gF(simPos)][gR(simPos)] = temp;
   temp = NULL;
 
-  square[i][c]->updatePosition(square, oldPos, turn);
+  square[i][c]->updatePosition(square, simPos, oldPos, turn, winston, charles);
   updateMoves(steal);
 //Function
 
@@ -232,7 +228,7 @@ void ChessBoard::updateMoves(bool &steal) {
     for (int c = 0; c < 8; c++) {
       if (square[i][c] != NULL)  {
 	string newPos;
-	string currPos = getPosition(i, c);
+	string currPos = getPosition(square, i, c);
 	int count = 0;
 
 	for (int n = 0; n < 8; n++) {
@@ -240,10 +236,7 @@ void ChessBoard::updateMoves(bool &steal) {
 
 	  bool condition1, condition2;
 	  newPos = createNewPos(n, h);
-	  //if (square[n][h] == NULL) {
-	  //  square[i][c]->writeMove(count, newPos);
-	  //  count++;
-	  //}
+
 	  if ((square[n][h] == NULL) || (square[n][h]->getColour() != square[i][c]->getColour())) {
 	    //condition checks for the destination
 	    condition1 = square[i][c]-> validRoute(square, currPos, newPos);
@@ -275,19 +268,6 @@ void ChessBoard::updateMoves(bool &steal) {
 
         return output;
       }
-
-      string ChessBoard::getPosition(int i, int c) {
-        string letter;
-        string number;
-
-        letter = square[i][c]->getFile() + 65;
-        number = square[i][c]->getRank() + 49;
-        string output = letter + number;
-
-        return output;
-      }
-
-
 
     void ChessBoard::checkMove(string currPos, string newPos, bool &steal) {
       error_code = 0; //reset error_code from previous checks
@@ -418,6 +398,18 @@ void ChessBoard::updateMoves(bool &steal) {
       }
 
     }
+
+
+  string getPosition (FigurePtr square[][8], int i, int c) {
+    string letter;
+    string number;
+    letter = square[i][c]->getFile() + 65;
+    number = square[i][c]->getRank() + 49;
+    string output = letter + number;
+
+    return output;
+    }
+
 
     int gF (string str) {
       char target;

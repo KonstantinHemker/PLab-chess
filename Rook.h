@@ -11,7 +11,7 @@ class Rook : public Figure  {
   bool validMove(FigurePtr square[][8], string currPos, string newPos) override;
   static bool straightMove(FigurePtr square[][8], string currPos, string newPos, int rank, int file);
   bool validRoute(FigurePtr square[][8], string currPos, string newPos) override;
-  //static bool straightRoute(FigurePtr square[][8], string currPos, string newPos);
+  static bool straightRoute(FigurePtr square[][8], string currPos, string newPos, int rank, int file);
 };
 
 #endif

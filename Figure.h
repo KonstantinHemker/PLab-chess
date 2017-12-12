@@ -13,7 +13,7 @@ protected:
   string legalMove[50];
 public:
   Figure (string input_type, bool input_colour, int input_rank, int input_file);
-  void updatePosition(FigurePtr square[][8], string newPos, bool turn);
+  void updatePosition(FigurePtr square[][8], string currPos, string newPos, bool turn, string &winston, string &charles);
   void getValidMoves(FigurePtr square[][8], bool turn);
   string createNewPos(int i, int c);
   //Function that checks whether the destination is either a
@@ -33,7 +33,7 @@ public:
   virtual bool validMove(FigurePtr square[][8], string currPos, string newPos) = 0;
   //virtual bool validRoute(FigurePtr square[][8], string currPos, string newPos);
   string getType();
-  string getPosition();
+  //string getPosition();
   string getValidMove(int n);
   bool getColour();
   void printColour();

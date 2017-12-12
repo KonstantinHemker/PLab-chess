@@ -9,13 +9,20 @@ Figure::Figure(string input_type, bool input_colour, int input_file, int input_r
   file = input_file;
 }
 
-void Figure::updatePosition(FigurePtr square[][8], string newPos, bool turn)  {
+void Figure::updatePosition(FigurePtr square[][8], string currPos, string newPos, bool turn, string &winston, string &charles)  {
 
   file = gF(newPos);
   rank = gR(newPos);
 
-  //empty array of previously valid Moves
-  //legalMove.fill('\0');
+//Updating the King if applicable
+  if (getType() == "King") {
+    if (turn == 0)
+      winston = getPosition(square, file, rank);
+    if (turn == 1)
+      charles = getPosition(square, file, rank);
+  }
+
+
 
   for (int i = 0; i < 50;  i++) {
     legalMove[i] = "";
@@ -138,6 +145,7 @@ string Figure::createNewPos(int i, int c)  {
   return output;
 }
 
+/*
 string Figure::getPosition() {
   string letter;
   string number;
@@ -148,7 +156,7 @@ string Figure::getPosition() {
 
   return output;
 }
-
+*/
 string Figure::getValidMove(int n) {
   return legalMove[n];
 }

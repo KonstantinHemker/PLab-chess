@@ -11,7 +11,9 @@ class Bishop : public Figure {
  public:
    Bishop(string type, bool c, int a, int b);
    bool validMove (FigurePtr square[][8], string currPos, string newPos) override;
+   static bool diagonalMove(FigurePtr square[][8], string currPos, string newPos, int rank, int file);
    bool validRoute(FigurePtr square[][8], string currPos, string newPos) override;
+   static bool diagonalRoute(FigurePtr square[][8], string currPos, string newPos, int rank, int file);
 };
 
 #endif
