@@ -33,8 +33,8 @@ bool Queen::validRoute(FigurePtr square[][8], string currPos, string newPos) {
   bool result;
 
 //We only want to check the route for all cases that the queen moves by more than 1 field
-
-if ((abs(horizontal == 1) || abs(vertical) == 1))
+//ADJUST HERE - JUST THE OR STATEMENT IS NOT ENOUGH
+  if ((abs(horizontal == 1) && (vertical == 0))|| ((abs(vertical) == 1) && (horizontal == 0)))
   return true;
 else {
 if (horizontal > 1) {
