@@ -14,8 +14,12 @@ void Figure::updatePosition(FigurePtr square[][8], string newPos, bool turn)  {
   file = gF(newPos);
   rank = gR(newPos);
 
+  //empty array of previously valid Moves
+  //legalMove.fill('\0');
 
-
+  for (int i = 0; i < 50;  i++) {
+    legalMove[i] = '\0';
+}
   //Update the legal moves for each figure on the field
 
 /*
@@ -53,7 +57,7 @@ bool Figure::checkCheck(FigurePtr square[][8], int i, int c, bool turn, string w
 	return true;
     }
   }
-				  
+
   return false;
 }
 
@@ -160,9 +164,9 @@ int Figure::getRank() {
 
   void Figure::writeMove(int count, string newPos) {
     legalMove[count] = newPos;
-    cout << getType() << legalMove[count];
-    printColour();
-    cout << endl;
+    //cout << getType() << legalMove[count];
+    //printColour();
+    //cout << endl;
   }
 
 bool Figure::validRoute(FigurePtr square[][8], string currPos, string newPos) {

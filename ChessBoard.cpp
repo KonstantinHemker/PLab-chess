@@ -164,7 +164,7 @@ bool ChessBoard::simMove(string simPos, int i, int c, bool steal) {
 
   if ((i == gF(simPos)) && (c == gR(simPos))) //nothing will change if we simulate a move to the own position
     return true;
-  
+
   //We don't have to check the validity of the moves when we simulate,
   //as we only simulate the moves that have previously been validated
 
@@ -214,17 +214,17 @@ bool ChessBoard::checkCheck() {
 
 void ChessBoard::printCheckMate(bool turn) {
   if (turn == 0)
-    cout << "Black is in checkmate!" << endl;
+    cout << "Black is in checkmate" << endl;
   else
-    cout << "White is in checkmate!" << endl;
+    cout << "White is in checkmate" << endl;
 }
 
 
 void ChessBoard::printCheck(bool turn) {
   if (turn == 0)
-    cout << "Black is in check!" << endl;
+    cout << "Black is in check" << endl;
   else
-    cout << "White is in check!" << endl;
+    cout << "White is in check" << endl;
 }
 
 void ChessBoard::updateMoves(bool &steal) {
