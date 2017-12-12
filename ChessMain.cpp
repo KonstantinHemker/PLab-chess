@@ -150,7 +150,7 @@ int main() {
 
 
 
-/*
+
     cout << endl;
 cout << "===========================" << endl;
 cout << "Hohmeister vs Frank (1993)" << endl;
@@ -182,7 +182,7 @@ cb.submitMove ("D4", "D5");
 cb.submitMove ("B4", "A5");
 cb.submitMove ("C2", "C4");
 cb.submitMove ("E4", "E3");
-*/
+
 /*
 cout << endl;
 cout << "================================================" << endl;

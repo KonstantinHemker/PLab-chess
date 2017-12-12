@@ -16,10 +16,15 @@ bool Queen::validMove(FigurePtr square[][8], string currPos, string newPos) {
   //absvalue[X][Y] where X == Y
   //Note that this assumes that it is also being checked for valid destination and
   //the route itself
+
+  
   if (abs(horizontal) == abs(vertical))
     return true;
   if ((abs(horizontal) == 0) || ((abs(vertical) == 0)))
     return true;
+
+    //if ((Rook::validMove(square, currPos, newPos) == true) || (Bishop::validMove(square,currPos, newPos) == true))
+    //  return true;
 
 
   return false;

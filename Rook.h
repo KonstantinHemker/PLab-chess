@@ -9,7 +9,9 @@ class Rook : public Figure  {
  public:
   Rook(string type, bool c, int a, int b);
   bool validMove(FigurePtr square[][8], string currPos, string newPos) override;
+  static bool straightMove(FigurePtr square[][8], string currPos, string newPos, int rank, int file);
   bool validRoute(FigurePtr square[][8], string currPos, string newPos) override;
+  //static bool straightRoute(FigurePtr square[][8], string currPos, string newPos);
 };
 
 #endif

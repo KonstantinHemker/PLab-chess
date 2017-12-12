@@ -18,7 +18,7 @@ void Figure::updatePosition(FigurePtr square[][8], string newPos, bool turn)  {
   //legalMove.fill('\0');
 
   for (int i = 0; i < 50;  i++) {
-    legalMove[i] = '\0';
+    legalMove[i] = "";
 }
   //Update the legal moves for each figure on the field
 

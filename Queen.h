@@ -5,7 +5,7 @@
 //#include "ChessBoard.h"
 #include "Figure.h"
 
-class Queen : public Figure {
+class Queen : public Figure{
  private:
 //converted ASCII characters
  public:
