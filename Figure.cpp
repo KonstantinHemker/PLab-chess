@@ -79,6 +79,8 @@ bool Figure::validStep(FigurePtr square[][8], string currPos, string newPos, int
     cerr << " from " << currPos << " to " << newPos << endl;
     return false;
   }
+  return true;
+
 }
 
 

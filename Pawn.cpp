@@ -104,7 +104,6 @@ bool Pawn::validMove(FigurePtr square[][8], string currPos, string newPos)  {
 
 
 bool Pawn::validRoute(FigurePtr square[][8], string currPos, string newPos) {
-  int horizontal = gF(newPos) - file;
   int vertical = gR(newPos) - rank;
 
   //for white figures

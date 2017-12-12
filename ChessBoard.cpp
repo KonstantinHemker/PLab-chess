@@ -77,7 +77,7 @@ ChessBoard::ChessBoard () {
     winston = "E1";
     charles = "E8";
 
-    cout << "A new chess game is started" << endl;
+    cout << "A new chess game is started!" << endl;
 }
 
 ChessBoard::~ChessBoard() {
@@ -395,5 +395,5 @@ void ChessBoard::updateMoves(bool &steal) {
         winston = "E1";
         charles = "E8";
 
-      cout << "A new chess game is started" << endl;
+      cout << "A new chess game is started!" << endl;
     }
