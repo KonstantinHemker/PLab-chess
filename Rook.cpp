@@ -37,35 +37,35 @@ bool Rook::validRoute(FigurePtr square[][8], string currPos, string newPos) {
       if (square[file+1][rank] == NULL)
         result = true;
       else
-        result = false;
+        return false;
     }
   }
 
   if (horizontal < -1) {
-    for (int i = 1; i < horizontal; i++) {
+    for (int i = 1; i < abs(horizontal); i++) {
       if (square[file-1][rank] == NULL)
         result = true;
       else
-        result = false;
+        return false;
     }
   }
 
   if (vertical > 1) {
-    for (int i = 1; i < horizontal; i++) {
+    for (int i = 1; i < abs(vertical); i++) {
       if (square[file][rank+i] == NULL)
         result = true;
       else
-        result = false;
+        return false;
     }
   }
 
 
   if (vertical < -1) {
-    for (int i = 1; i < horizontal; i++) {
+    for (int i = 1; i < abs(vertical); i++) {
       if (square[file][rank-i] == NULL)
         result = true;
       else
-        result = false;
+        return false;
     }
   }
 }

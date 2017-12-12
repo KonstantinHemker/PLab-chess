@@ -39,44 +39,44 @@ if ((abs(horizontal == 1) || abs(vertical) == 1))
 else {
 if (horizontal > 1) {
   for (int i = 1; i < horizontal; i++) {
-    if (square[file][rank+i] == NULL)
+    if (square[file+i][rank] == NULL)
       result = true;
     else
-      result = false;
+      return false;
   }
 }
 
 if (horizontal < -1) {
-  for (int i = 1; i < horizontal; i++) {
-    if (square[file][rank-i] == NULL)
+  for (int i = 1; i < abs(horizontal); i++) {
+    if (square[file-i][rank] == NULL)
       result = true;
     else
-      result = false;
+      return false;
   }
 }
 
 if (vertical > 1) {
-  for (int i = 1; i < horizontal; i++) {
+  for (int i = 1; i < vertical; i++) {
     if (square[file][rank+i] == NULL)
       result = true;
     else
-      result = false;
+      return false;
   }
 }
 
 
 if (vertical < -1) {
-  for (int i = 1; i < horizontal; i++) {
+  for (int i = 1; i < abs(vertical); i++) {
     if (square[file][rank-i] == NULL)
       result = true;
     else
-      result = false;
+      return false;
   }
 }
 }
 
 
-if (abs(horizontal == 1))
+ if (abs(horizontal) == 1)
   return true;
 else {
 /*Possibility 1: Queen moves in a "double positive" diagonal */

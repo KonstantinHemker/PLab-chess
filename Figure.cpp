@@ -160,9 +160,9 @@ int Figure::getRank() {
 
   void Figure::writeMove(int count, string newPos) {
     legalMove[count] = newPos;
-    //cout << getType() << legalMove[count];
-    //printColour();
-    //cout << endl;
+    cout << getType() << legalMove[count];
+    printColour();
+    cout << endl;
   }
 
 bool Figure::validRoute(FigurePtr square[][8], string currPos, string newPos) {
