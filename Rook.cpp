@@ -29,7 +29,7 @@ bool Rook::validRoute(FigurePtr square[][8], string currPos, string newPos) {
 
   //We want to check the route for all cases that the Rook moves more than 1 field
   //The other case is already covered in the "destination" check
-  if ((abs(horizontal == 1) || abs(vertical) == 1))
+  if ((abs(horizontal) == 1) || (abs(vertical) == 1))
     return true;
   else {
   if (horizontal > 1) {

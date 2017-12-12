@@ -62,6 +62,8 @@ public:
   void switchTurn();
   void printMoveMessage(string currPos, string nextPos, bool &steal);
   bool getTurn();
+  bool checkCheck();
+  void printCheck(bool turn);
   //friend ostream& operator << (ostream)
 };
 

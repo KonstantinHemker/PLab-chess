@@ -28,7 +28,7 @@ bool Bishop::validRoute(FigurePtr square[][8], string currPos, string newPos) {
 
   //We want to check the route for all cases that the Bishop moves more than 1 field
 
-  if (abs(horizontal == 1))
+  if (abs(horizontal) == 1)
     return true;
   else {
 
