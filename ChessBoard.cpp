@@ -108,19 +108,19 @@ ChessBoard::~ChessBoard() {
       for (int n = 0; n < 8; n++) {
         for (int h = 0; h < 8; h++) {
 
-            bool condition1, condition2, condition3;
+            bool condition1, condition2;
             newPos = createNewPos(n, h);
             //if (square[n][h] == NULL) {
             //  square[i][c]->writeMove(count, newPos);
             //  count++;
             //}
-            if ((square[n][h] == NULL) || (square[n][h]->getColour() != turn)) {
+            if ((square[n][h] == NULL) || (square[n][h]->getColour() != square[i][c]->getColour())) {
               //condition checks for the destination
               condition1 = square[i][c]-> validRoute(square, currPos, newPos);
               //condition2 = square[n][h]-> validDestPositions(square, currPos, newPos, turn, steal);
-              condition3 = square[i][c]-> validMove(square, currPos, newPos);
+              condition2 = square[i][c]-> validMove(square, currPos, newPos);
 
-          if ((condition1 == true) && (condition2 == true) && (condition3 == true)) {
+          if ((condition1 == true) && (condition2 == true)) {
             square[i][c]->writeMove(count, newPos); // = newPos;
             count++;
               }
