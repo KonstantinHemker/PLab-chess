@@ -99,13 +99,13 @@ void Figure::getValidMoves(FigurePtr square[][8], bool turn) {
 */
 
 string Figure::createNewPos(int i, int c)  {
-  string file; //Note that this is deliberately temporarily overloading the variable name
-  string rank;
+  string f; //Note that this is deliberately temporarily overloading the variable name
+  string r;
   string output;
 
-  file = i + 65; //corresponds to ASCII table letter
-  rank = c + 49; //corresponds to ASCII table digits
-  output = file + rank;
+  f = i + 65; //corresponds to ASCII table letter
+  r = c + 49; //corresponds to ASCII table digits
+  output = f + r;
 
   return output;
 }
@@ -136,9 +136,9 @@ int Figure::getRank() {
 
   void Figure::writeMove(int count, string newPos) {
     legalMove[count] = newPos;
-    cout << getType() << legalMove[count];
-    printColour();
-    cout << endl;
+    //cout << getType() << legalMove[count];
+    //printColour();
+    //cout << endl;
   }
 
 bool Figure::validRoute(FigurePtr square[][8], string currPos, string newPos) {
