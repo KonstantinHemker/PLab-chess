@@ -17,7 +17,7 @@ bool Pawn::validMove(FigurePtr square[][8], string currPos, string newPos)  {
 
   //Condition(1): Colour white
   if (colour == 0)  {
-    if ((rank = 1) && ((vertical == 1) || (vertical == 2)) && (horizontal == 0))
+    if ((rank == 1) && ((vertical == 1) || (vertical == 2)) && (horizontal == 0))
       return true;
     if ((rank > 1) && (vertical == 1) && (horizontal == 0))
       return true;
@@ -31,7 +31,7 @@ bool Pawn::validMove(FigurePtr square[][8], string currPos, string newPos)  {
   }
     if (file > 0) { // avoids the leftmost edge case
     if (square[file-1][rank+1] != NULL) {
-      if ((square[file-1][rank+1]->getColour() != 0) && (vertical == -1) && (horizontal == 1))
+      if ((square[file-1][rank+1]->getColour() != 0) && (vertical == 1) && (horizontal == -1))
         return true;
     }
   }
@@ -39,7 +39,7 @@ bool Pawn::validMove(FigurePtr square[][8], string currPos, string newPos)  {
 
   //Condition(1): Colour Black
   if (colour == 1)  {
-    if ((rank = 6) && ((vertical == -2) || (vertical == -1)) && (horizontal == 0))
+    if ((rank == 6) && ((vertical == -2) || (vertical == -1)) && (horizontal == 0))
       return true;
     if ((rank < 6) && (vertical == -1) && (horizontal == 0))
       return true;
@@ -54,7 +54,7 @@ bool Pawn::validMove(FigurePtr square[][8], string currPos, string newPos)  {
 
   if (file > 0)
   if (square[file+1][rank-1] != NULL) {
-    if ((square[file+1][rank-1]->getColour() != 1)  && (vertical == 1) && (horizontal == -1))
+    if ((square[file+1][rank-1]->getColour() != 1)  && (vertical == -1) && (horizontal == 1))
       return true;
     }
 
