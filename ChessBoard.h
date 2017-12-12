@@ -65,8 +65,8 @@ public:
   bool checkCheck();
   void printCheckMate(bool turn);
   void printCheck(bool turn);
-  bool checkMate();
-  bool simMove(string simPos);
+  bool checkMate(bool steal);
+  bool simMove(string simPos, int i, int c, bool steal);
   //friend ostream& operator << (ostream)
 };
 

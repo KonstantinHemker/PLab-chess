@@ -92,31 +92,31 @@ ChessBoard::~ChessBoard() {
       updateMoves(steal);
 
       if (checkCheck() == true) {
-	if (checkMate() == true)
-	  printCheckMate(turn);
-	else
-	  printCheck(turn);
+	       if (checkMate(steal) == true)
+	        printCheckMate(turn);
+	       else
+	        printCheck(turn);
       }
-      
+
 
 
       switchTurn();
     }
 
-bool ChessBoard::checkMate() {
+bool ChessBoard::checkMate(bool steal) {
   int fileKing;
   int rankKing;
   bool result;
   string tempMove;
-  
+
   if (turn == 0) {
     fileKing = gF(winston);
     rankKing = gR(winston);
   }
-  if (turn == 1) {
+  else {
     fileKing = gF(charles);
     rankKing = gR(charles);
-  }  
+  }
   //essentially, we want to check here for two options.
   //(1) Can the king move somewhere where he is not in check?
   //(2) Can any other figure of the team move somewhere where the King is not in check
@@ -127,7 +127,7 @@ bool ChessBoard::checkMate() {
 
   //Condition 1: Moves of the King
   /*
-  for (int i = 0; i < 50 ; i++) 
+  for (int i = 0; i < 50 ; i++)
     {
       tempMove = square[fileKing][rankKing]->getValidMove(i);
       //simMove returns true if the King is still in chess after the simulated move
@@ -140,24 +140,57 @@ bool ChessBoard::checkMate() {
   //Condition 1+2: Moves of the other team members and the king
   for (int i = 0; i < 8; i++) {
     for (int c = 0; c < 8; c++) {
-      if ((square[i][c] != NULL) && (square[i][c]-> getColour() == turn)) {
-	for (int n = 0; n < 50; n++) {
-	  tempMove = square[i][c] -> getValidMove(n);
-	  if (simMove(tempMove) == true)
-	    result = true;
-	  else
-	    return false;
-	}
-      }
-    }
-  }	
-  
+      if ((square[i][c] != NULL) && (square[i][c]-> getColour() != turn)) {
+	       for (int n = 0; n < 20; n++) {
+	          tempMove = square[i][c]->getValidMove(n);
+	          if(simMove(tempMove, i, c, steal) == true)
+		    //simMove returns true if the King is still in chess after the simulated move
+	           result = true;
+	          else
+	           return false;
+	           }
+           }
+         }
+       }
+
   return result;
-}
+  }
 
 
-bool ChessBoard::simMove(string simPos) {
-  return false;//only temporary
+bool ChessBoard::simMove(string simPos, int i, int c, bool steal) {
+  bool result;
+  string oldPos = getPosition(i, c);
+  FigurePtr temp;
+
+  //We don't have to check the validity of the moves when we simulate,
+  //as we only simulate the moves that have previously been validated
+
+  //Make move
+  temp = square[gF(simPos)][gR(simPos)]; //temporary pointer to avoid memory leak
+  square[gF(simPos)][gR(simPos)] = square[i][c];
+  square[i][c] = NULL;
+
+  square[gF(simPos)][gR(simPos)]-> updatePosition(square, simPos, turn);
+  updateMoves(steal);
+
+  //The board is now in a state where the move we want to simulate has been made
+
+  //Check whether the King is still in Check
+  if(checkCheck() == true)
+  result = true;
+  else
+  result = false;
+
+  //Revert move
+  square[i][c] = square[gF(simPos)][gR(simPos)];
+  square[gF(simPos)][gR(simPos)] = temp;
+  temp = NULL;
+
+  square[i][c]->updatePosition(square, oldPos, turn);
+  updateMoves(steal);
+//Function
+
+  return result;//only temporary
 }
 
 
@@ -167,9 +200,9 @@ bool ChessBoard::checkCheck() {
       if (square[i][c] != NULL) {
 	if (square[i][c]->checkCheck(square, i, c, turn, winston, charles) == true)
 	  return true;
-	
+
 	//Function checks the valid moves only of the opponent figures
-	
+
       }
     }
   }
@@ -198,10 +231,10 @@ void ChessBoard::updateMoves(bool &steal) {
 	string newPos;
 	string currPos = getPosition(i, c);
 	int count = 0;
-	
+
 	for (int n = 0; n < 8; n++) {
         for (int h = 0; h < 8; h++) {
-	  
+
 	  bool condition1, condition2;
 	  newPos = createNewPos(n, h);
 	  //if (square[n][h] == NULL) {
@@ -213,7 +246,7 @@ void ChessBoard::updateMoves(bool &steal) {
 	    condition1 = square[i][c]-> validRoute(square, currPos, newPos);
 	    //condition2 = square[n][h]-> validDestPositions(square, currPos, newPos, turn, steal);
 	    condition2 = square[i][c]-> validMove(square, currPos, newPos);
-	    
+
 	    if ((condition1 == true) && (condition2 == true)) {
 	      square[i][c]->writeMove(count, newPos); // = newPos;
 	      count++;
@@ -227,35 +260,6 @@ void ChessBoard::updateMoves(bool &steal) {
 }
 
 
-/*
-    void ChessBoard::updateMoves(bool &steal) {
-      for (int i = 0; i < 8; i++) {
-        for (int c = 0; c < 8; c++) {
-          if (square[i][c] != NULL)  {
-            string newPos;
-            string currPos = getPosition(i, c);
-            int count = 0;
-
-	    for (int n = 0; n < 8; n++) {
-	      for (int h = 0; h < 8; h++) {
-
-            bool condition1, condition2, condition3;
-            newPos = createNewPos(n, h);
-            condition1 = square[i][c]-> validRoute(square, currPos, newPos);
-            condition2 = square[i][c]-> validDestination(square, currPos, newPos, turn, steal);
-            condition3 = square[i][c]->validMove(square, currPos, newPos);
-
-          if ((condition1 == true) && (condition2 == true) && (condition3 == true)) {
-            square[i][c]->writeMove(count, newPos); // = newPos;
-            count++;
-              }
-            }
-          }
-	  }
-	}
-        }
-      }
-*/
 
       string ChessBoard::createNewPos(int i, int c)  {
         string File; //Note that this is deliberately temporarily overloading the variable name
