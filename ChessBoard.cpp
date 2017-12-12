@@ -121,9 +121,8 @@ ChessBoard::~ChessBoard() {
 	        printCheck(turn);
       }
 
-
-
       switchTurn();
+
     }
 
 bool ChessBoard::checkMate(bool steal) {

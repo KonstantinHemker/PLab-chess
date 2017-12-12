@@ -14,16 +14,37 @@ bool Pawn::validMove(FigurePtr square[][8], string currPos, string newPos)  {
   /*Condition(1): Colour white*/
   if (colour == 0)  {
 
+    
   /*Condition (2): First or second move*/
+    /*
     if ((rank == 1) && ((vertical == 1) || (vertical == 2)) && (horizontal == 0)) {
       if ((square[file][rank+1] == NULL) && (square[file][rank +2] == NULL))
         return true;
       }
+    
+    if ((rank > 1) && (vertical == 1) && (horizontal == 0)) {
+      if ((square[file][rank+1]) == NULL)
+        return true;
+      }
+    */
+
+  
+  /*Condition (2): First or second move*/
+    if ((rank == 1) && (vertical == 2) && (horizontal == 0)) {
+      if (square[file][rank +2] == NULL)
+        return true;
+      }
+    if ((rank == 1) && (vertical == 1) && (horizontal == 0)) {
+      if (square[file][rank+1] == NULL)
+	return true;
+    }
     if ((rank > 1) && (vertical == 1) && (horizontal == 0)) {
       if ((square[file][rank+1]) == NULL)
         return true;
       }
 
+
+    
     /*Condition(3): Immediate diagonal fields*/
     if ((file < 7) && (file > 0)) {
       if (square[file+1][rank+1] != NULL) {
