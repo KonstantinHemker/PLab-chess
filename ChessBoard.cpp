@@ -117,36 +117,29 @@ ChessBoard::~ChessBoard() {
       if (checkCheck() == true) {
 	       if (checkMate(steal) == true)
 	        printCheckMate(turn);
-	       else
+	       else {
 	        printCheck(turn);
+          if (staleMate() == true)
+            printStaleMate();
+          }
       }
 
       switchTurn();
 
+
     }
 
 bool ChessBoard::checkMate(bool steal) {
-  int fileKing;
-  int rankKing;
-  bool result;
-  string tempMove;
+string tempMove;
+bool result;
 
-  if (turn == 0) {
-    fileKing = gF(winston);
-    rankKing = gR(winston);
-  }
-  else {
-    fileKing = gF(charles);
-    rankKing = gR(charles);
-  }
-  //essentially, we want to check here for two options.
+  //Essentially, we want to check here for two options.
   //(1) Can the king move somewhere where he is not in check?
   //(2) Can any other figure of the team move somewhere where the King is not in check
   //That is, we want to simulate all the possible moves of each team that is in check
   //and check whether the King is still in Check after.
   //If there is nowhere he can go, we have the checkMate condition will evaluate
   //as true.
-
 
   //Condition 1+2: Moves of the other team members and the king
   for (int i = 0; i < 8; i++) {
@@ -166,6 +159,30 @@ bool ChessBoard::checkMate(bool steal) {
 
   return result;
   }
+
+
+bool ChessBoard::staleMate() {
+bool result;
+  for (int i = 0; i < 8; i++) {
+    for (int c = 0; c < 8; c++) {
+      if ((square[i][c] != NULL) && ((square[i][c]->getColour() != turn)))
+        if (square[i][c]->getValidMove(0) == "") //i.e. there is at least one valid move
+          result = false;
+        else {
+        return false;
+      }
+    }
+  }
+return result;
+}
+
+void ChessBoard::printStaleMate() {
+  if (turn == 0)
+    cout << "Black is in stalemate" << endl;
+  else
+    cout << "White is in stalemate" << endl;
+}
+
 
 
 bool ChessBoard::simMove(string simPos, int i, int c, bool steal) {

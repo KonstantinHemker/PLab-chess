@@ -78,6 +78,16 @@ public:
   bool checkMate(bool steal);
 
 
+  //Precondition: Function is called after each move was submitted and the other
+  //player is not in check.
+  //Postcondition: Checks whether any of the figures of the other player have
+  //any valid moves left. The function returns true if this is the case
+  bool staleMate();
+
+  //Postconditon: Prints out error message corresponding to stalemate 
+  void printStaleMate();
+
+
   //Precondition: Is called as part of the check whether a colour is in checkmate`
   //Postcondition: Operates in three steps (1) Move figure to on of its valid
   //positions and update its valid positions (2) check whether the King is still
