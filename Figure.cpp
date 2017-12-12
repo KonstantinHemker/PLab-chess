@@ -160,14 +160,21 @@ int Figure::getRank() {
 
   void Figure::writeMove(int count, string newPos) {
     legalMove[count] = newPos;
-    cout << getType() << legalMove[count];
-    printColour();
-    cout << endl;
+    //cout << getType() << legalMove[count];
+    //printColour();
+    //cout << endl;
   }
 
 bool Figure::validRoute(FigurePtr square[][8], string currPos, string newPos) {
 
   return true; //will be adjusted for the rook, the queen and the bishop
+}
+
+
+int Figure::getArraySize() {
+  int temp;
+  temp = sizeof(legalMove)/sizeof(legalMove[0]);
+  return temp;
 }
 
 

@@ -91,13 +91,74 @@ ChessBoard::~ChessBoard() {
       square[fNew][rNew]->updatePosition(square, newPos, turn);
       updateMoves(steal);
 
-      if (checkCheck() == true)
-	printCheck(turn);
+      if (checkCheck() == true) {
+	if (checkMate() == true)
+	  printCheckMate(turn);
+	else
+	  printCheck(turn);
+      }
       
 
 
       switchTurn();
     }
+
+bool ChessBoard::checkMate() {
+  int fileKing;
+  int rankKing;
+  bool result;
+  string tempMove;
+  
+  if (turn == 0) {
+    fileKing = gF(winston);
+    rankKing = gR(winston);
+  }
+  if (turn == 1) {
+    fileKing = gF(charles);
+    rankKing = gR(charles);
+  }  
+  //essentially, we want to check here for two options.
+  //(1) Can the king move somewhere where he is not in check?
+  //(2) Can any other figure of the team move somewhere where the King is not in check
+  //That is, we want to simulate all the possible moves of each team that is in check
+  //and check whether the King is still in Check after.
+  //If there is nowhere he can go, we have the checkMate condition will evaluate
+  //as true.
+
+  //Condition 1: Moves of the King
+  /*
+  for (int i = 0; i < 50 ; i++) 
+    {
+      tempMove = square[fileKing][rankKing]->getValidMove(i);
+      //simMove returns true if the King is still in chess after the simulated move
+      if (simMove(tempMove) == true)
+	result = true;
+      else
+	return false;
+    }
+  */
+  //Condition 1+2: Moves of the other team members and the king
+  for (int i = 0; i < 8; i++) {
+    for (int c = 0; c < 8; c++) {
+      if ((square[i][c] != NULL) && (square[i][c]-> getColour() == turn)) {
+	for (int n = 0; n < 50; n++) {
+	  tempMove = square[i][c] -> getValidMove(n);
+	  if (simMove(tempMove) == true)
+	    result = true;
+	  else
+	    return false;
+	}
+      }
+    }
+  }	
+  
+  return result;
+}
+
+
+bool ChessBoard::simMove(string simPos) {
+  return false;//only temporary
+}
 
 
 bool ChessBoard::checkCheck() {
@@ -113,6 +174,13 @@ bool ChessBoard::checkCheck() {
     }
   }
   return false;
+}
+
+void ChessBoard::printCheckMate(bool turn) {
+  if (turn == 0)
+    cout << "Black is in checkmate!" << endl;
+  else
+    cout << "White is in checkmate!" << endl;
 }
 
 

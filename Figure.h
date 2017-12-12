@@ -40,6 +40,7 @@ public:
   int getFile();
   int getRank();
   bool checkCheck(FigurePtr square[][8], int i, int c, bool turn, string winston, string charles);
+  int getArraySize();
 };
 
 

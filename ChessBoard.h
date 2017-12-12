@@ -63,7 +63,10 @@ public:
   void printMoveMessage(string currPos, string nextPos, bool &steal);
   bool getTurn();
   bool checkCheck();
+  void printCheckMate(bool turn);
   void printCheck(bool turn);
+  bool checkMate();
+  bool simMove(string simPos);
   //friend ostream& operator << (ostream)
 };
 
