@@ -162,6 +162,9 @@ bool ChessBoard::simMove(string simPos, int i, int c, bool steal) {
   string oldPos = getPosition(i, c);
   FigurePtr temp;
 
+  if ((i == gF(simPos)) && (c == gR(simPos))) //nothing will change if we simulate a move to the own position
+    return true;
+  
   //We don't have to check the validity of the moves when we simulate,
   //as we only simulate the moves that have previously been validated
 
