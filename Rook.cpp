@@ -36,7 +36,7 @@ bool Rook::straightRoute(FigurePtr square[][8], string currPos, string newPos, i
 
   //We want to check the route for all cases that the Rook moves more than 1 field
   //The other case is already covered in the "destination" check
-  if ((abs(horizontal == 1) && (vertical == 0))|| ((abs(vertical) == 1) && (horizontal == 0)))
+  if (((abs(horizontal) == 1) && (vertical == 0))|| ((abs(vertical) == 1) && (horizontal == 0)))
   return true;
 
 /*Possiblity 1: Rook moves "North"*/

@@ -107,7 +107,7 @@ ChessBoard::~ChessBoard() {
       printMoveMessage(currPos, newPos, steal);
       //Make move
       FigurePtr temp = square[fOld][rOld];
-      //delete square[fNew][rNew];
+
       square[fNew][rNew] = temp;
       square[fOld][rOld] = NULL;
 
@@ -212,7 +212,7 @@ bool ChessBoard::simMove(string simPos, int i, int c, bool steal) {
 bool ChessBoard::checkCheck() {
   for(int i = 0; i < 8; i++) {
     for (int c = 0; c < 8; c++) {
-      if (square[i][c] != NULL) {
+      if ((square[i][c] != NULL) && (square[i][c]->getColour() == turn)) {
 	if (square[i][c]->checkCheck(square, i, c, turn, winston, charles) == true)
 	  return true;
 
@@ -243,31 +243,31 @@ void ChessBoard::updateMoves(bool &steal) {
   for (int i = 0; i < 8; i++) {
     for (int c = 0; c < 8; c++) {
       if (square[i][c] != NULL)  {
-	string newPos;
-	string currPos = getPosition(square, i, c);
-	int count = 0;
+	      string newPos;
+	      string currPos = getPosition(square, i, c);
+	      int count = 0;
 
-	for (int n = 0; n < 8; n++) {
-        for (int h = 0; h < 8; h++) {
+	       for (int n = 0; n < 8; n++) {
+           for (int h = 0; h < 8; h++) {
 
-	  bool condition1, condition2;
-	  newPos = createNewPos(n, h);
+	           bool condition1, condition2;
+	           newPos = createNewPos(n, h);
 
-	  if ((square[n][h] == NULL) || (square[n][h]->getColour() != square[i][c]->getColour())) {
-	    //condition checks for the destination
-	    condition1 = square[i][c]-> validRoute(square, currPos, newPos);
-	    condition2 = square[i][c]-> validMove(square, currPos, newPos);
+	           if ((square[n][h] == NULL) || (square[n][h]->getColour() != square[i][c]->getColour())) {
+	           //condition checks for the destination
+	           condition1 = square[i][c]-> validRoute(square, currPos, newPos);
+	           condition2 = square[i][c]-> validMove(square, currPos, newPos);
 
-	    if ((condition1 == true) && (condition2 == true)) {
-	      square[i][c]->writeMove(count, newPos); // = newPos;
-	      count++;
-	    }
-	  }
-	}
-	}
-  }
-  }
-  }
+	           if ((condition1 == true) && (condition2 == true)) {
+	             square[i][c]->writeMove(count, newPos); // = newPos;
+	             count++;
+	               }
+	             }
+           }
+         }
+       }
+     }
+   }
 }
 
 

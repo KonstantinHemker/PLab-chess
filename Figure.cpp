@@ -17,9 +17,9 @@ void Figure::updatePosition(FigurePtr square[][8], string currPos, string newPos
 //Updating the King if applicable
   if (getType() == "King") {
     if (turn == 0)
-      winston = getPosition(square, file, rank);
-    if (turn == 1)
       charles = getPosition(square, file, rank);
+    if (turn == 1)
+      winston = getPosition(square, file, rank);
   }
 
 //Resetting the array of valid moves
@@ -30,18 +30,18 @@ void Figure::updatePosition(FigurePtr square[][8], string currPos, string newPos
 
 
 bool Figure::checkCheck(FigurePtr square[][8], int i, int c, bool turn, string winston, string charles) {
-  if (turn == 0) {
+  if (square[i][c] -> getColour() == 0) {
     for (int n = 0; n < 30 ; n++) {
       if (legalMove[n] == charles)
-	return true;
+	      return true;
     }
   }
 
 
-  if (turn == 1) {
+  if (square[i][c] -> getColour() == 1) {
     for (int n = 0; n < 30; n++) {
       if (legalMove[n] == winston)
-	return true;
+	     return true;
     }
   }
 
