@@ -27,7 +27,7 @@ int main() {
 
     cb.submitMove("F8", "B4");
     cout << endl;
-/*
+
     cout << "===========================" << endl;
     cout << "Alekhine vs. Vasic (1931)" << endl;
     cout << "===========================" << endl;
@@ -78,9 +78,8 @@ int main() {
 
     cb.submitMove("D3", "G6");
     cout << endl;
-*/
 
-
+/**************OTHER TESTS*******************/
 /*
     cout << endl;
 cout << "===========================" << endl;
@@ -114,7 +113,7 @@ cb.submitMove ("B4", "A5");
 cb.submitMove ("C2", "C4");
 cb.submitMove ("E4", "E3");
 */
-
+/*
 cout << endl;
 cout << "================================================" << endl;
 cout << "Anderssen vs Kieseritzky (1851) - Immortal Game" << endl;
@@ -167,7 +166,7 @@ cb.submitMove ("E8", "D8");
 cb.submitMove ("F3", "F6");
 cb.submitMove ("G8", "F6");
 cb.submitMove ("D6", "E7");
-
+*/
 /*
 cout << endl;
 cout << "======================================" << endl;

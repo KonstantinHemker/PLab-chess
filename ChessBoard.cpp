@@ -8,10 +8,37 @@
 #include "Pawn.h"
 #include "Queen.h"
 #include "Rook.h"
-#include "Field.h"
 
 using namespace std;
 
+/************************GLOBAL HELPER FUNCTIONS*****************************/
+  string getPosition (FigurePtr square[][8], int i, int c) {
+    string letter;
+    string number;
+    letter = square[i][c]->getFile() + 65;
+    number = square[i][c]->getRank() + 49;
+    string output = letter + number;
+
+    return output;
+    }
+
+
+    int gF (string str) {
+      char target;
+      target = str[0];
+      return target-65;
+    }
+
+    int gR (string str) {
+      char temp = str[1];
+      int x = temp - '0';
+      return x-1;
+    }
+
+
+
+
+/*******************MEMBER FUNCTIONS OF THE CHESSBOARD************************/
 ChessBoard::ChessBoard () {
 
   turn = 0; //White always begins
@@ -121,18 +148,7 @@ bool ChessBoard::checkMate(bool steal) {
   //If there is nowhere he can go, we have the checkMate condition will evaluate
   //as true.
 
-  //Condition 1: Moves of the King
-  /*
-  for (int i = 0; i < 50 ; i++)
-    {
-      tempMove = square[fileKing][rankKing]->getValidMove(i);
-      //simMove returns true if the King is still in chess after the simulated move
-      if (simMove(tempMove) == true)
-	result = true;
-      else
-	return false;
-    }
-  */
+
   //Condition 1+2: Moves of the other team members and the king
   for (int i = 0; i < 8; i++) {
     for (int c = 0; c < 8; c++) {
@@ -240,7 +256,6 @@ void ChessBoard::updateMoves(bool &steal) {
 	  if ((square[n][h] == NULL) || (square[n][h]->getColour() != square[i][c]->getColour())) {
 	    //condition checks for the destination
 	    condition1 = square[i][c]-> validRoute(square, currPos, newPos);
-	    //condition2 = square[n][h]-> validDestPositions(square, currPos, newPos, turn, steal);
 	    condition2 = square[i][c]-> validMove(square, currPos, newPos);
 
 	    if ((condition1 == true) && (condition2 == true)) {
@@ -250,8 +265,8 @@ void ChessBoard::updateMoves(bool &steal) {
 	  }
 	}
 	}
-      }
-    }
+  }
+  }
   }
 }
 
@@ -286,7 +301,7 @@ void ChessBoard::updateMoves(bool &steal) {
       }
 
 
-      //Check NO_PIECE
+      //Check WRONG_TURN
       if (square[gF(currPos)][gR(currPos)]-> getColour() != turn) {
         error_code = WRONG_TURN;
         if (turn == 1) {
@@ -313,10 +328,6 @@ void ChessBoard::updateMoves(bool &steal) {
 
     return true;
   }
-
-    bool ChessBoard::getTurn() {
-      return turn;
-    }
 
     void ChessBoard::switchTurn() {
       if (turn == 0)
@@ -377,48 +388,12 @@ void ChessBoard::updateMoves(bool &steal) {
         square[c][6] = new Pawn("Pawn", 1, c, 6);
 
       for (int i = 0; i < 8 ; i++) {
-        for (int c = 2; c < 6; c++)
+        for (int c = 2;   c < 6; c++)
           square[i][c] = NULL;
         }
 
+        winston = "E1";
+        charles = "E8";
+
       cout << "A new chess game is started" << endl;
-    }
-
-    void ChessBoard::printBoard() {
-      for (int i = 7; i >=0; i--) {
-        cout << endl;
-        cout << "+-+-+" << endl;
-
-        for (int c = 7; c >=0; c--) {
-          if (square[i][c] != 0)
-          cout << "on " <<  i << " " << c << square[i][c]->getType() << endl;
-          else
-          cout << "NULL" << endl;
-        }
-      }
-
-    }
-
-
-  string getPosition (FigurePtr square[][8], int i, int c) {
-    string letter;
-    string number;
-    letter = square[i][c]->getFile() + 65;
-    number = square[i][c]->getRank() + 49;
-    string output = letter + number;
-
-    return output;
-    }
-
-
-    int gF (string str) {
-      char target;
-      target = str[0];
-      return target-65;
-    }
-
-    int gR (string str) {
-      char temp = str[1];
-      int x = temp - '0';
-      return x-1;
     }

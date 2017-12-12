@@ -1,6 +1,6 @@
 #Makefile for chess executable program
 
-OBJ = ChessMain.o ChessBoard.o King.o Queen.o Rook.o Bishop.o Knight.o Pawn.o Figure.o Field.o
+OBJ = ChessMain.o ChessBoard.o King.o Queen.o Rook.o Bishop.o Knight.o Pawn.o Figure.o
 
 EXE = chess
 CXX = g++ -std=c++11

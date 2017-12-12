@@ -9,14 +9,12 @@ bool Pawn::validMove(FigurePtr square[][8], string currPos, string newPos)  {
   int horizontal = gF(newPos)-file;
   int vertical = gR(newPos)-rank;
 
-  //We cannot deal with absolute values in the case of the pawn, because it can
-  //only ever move into one vertical direction of the board. Hence, the valid movement
-  //of the pawn depends on its (1) colour, (2) whether it's the pawn's first move and
-  //(3) whether there is a figure of the opposite colours in the immediate
-  // diagonal fields "in front" of the pawn
 
-  //Condition(1): Colour white
+
+  /*Condition(1): Colour white*/
   if (colour == 0)  {
+
+  /*Condition (2): First or second move*/
     if ((rank == 1) && ((vertical == 1) || (vertical == 2)) && (horizontal == 0)) {
       if ((square[file][rank+1] == NULL) && (square[file][rank +2] == NULL))
         return true;
@@ -26,7 +24,7 @@ bool Pawn::validMove(FigurePtr square[][8], string currPos, string newPos)  {
         return true;
       }
 
-    //Condition(2): Immediate diagonal fields (non edge pawns)
+    /*Condition(3): Immediate diagonal fields*/
     if ((file < 7) && (file > 0)) {
       if (square[file+1][rank+1] != NULL) {
 	if ((square[file+1][rank+1]->getColour() != 0) && (vertical == 1) && (horizontal == 1))
@@ -37,14 +35,14 @@ bool Pawn::validMove(FigurePtr square[][8], string currPos, string newPos)  {
 	return true;
       }
     }
-
+    //edge case
     if (file == 0) {
       if (square[file+1][rank+1] != NULL) {
       if ((square[file+1][rank+1]->getColour() != 0) && (vertical == 1) && (horizontal == 1))
 	return true;
     }
     }
-
+    //edge case
     if (file == 7) {
       if (square[file-1][rank+1] != NULL) {
       if ((square[file-1][rank+1]->getColour() !=0) && (vertical == 1) && (horizontal == -1))
@@ -56,6 +54,8 @@ bool Pawn::validMove(FigurePtr square[][8], string currPos, string newPos)  {
 
   //Condition(1): Colour Black
   if (colour == 1)  {
+
+  /*Condition (2): First or second move*/
     if ((rank == 6) && ((vertical == -2) || (vertical == -1)) && (horizontal == 0)) {
       if ((square[file][rank-1] == NULL) && (square[file][rank -2] == NULL))
       return true;
@@ -65,7 +65,9 @@ bool Pawn::validMove(FigurePtr square[][8], string currPos, string newPos)  {
       if ((square[file][rank-1]) == NULL)
       return true;
     }
-    //Beating diagonally
+
+
+  /*Condition(3): Immediate diagonal fields (non edge pawns)*/
     if ((file < 7) && (file > 0)) { //avoids the rightmost/leftmost edge case
   if (square[file+1][rank-1] != NULL) {
     if ((square[file+1][rank-1]->getColour() != 1) && (vertical == -1) && (horizontal == +1))
@@ -78,12 +80,13 @@ bool Pawn::validMove(FigurePtr square[][8], string currPos, string newPos)  {
     }
   }
 
+  //edge case
   if (file == 0) {
     if (square[file+1][rank-1] != NULL)
       if ((square[file+1][rank-1]->getColour() != 1) && (vertical == -1) && (horizontal == -1))
 	return true;
 	}
-
+  //edge case
   if (file == 7) {
   if (square[file-1][rank-1] != NULL) {
     if ((square[file-1][rank-1]->getColour() != 1)  && (vertical == -1) && (horizontal == 1))
